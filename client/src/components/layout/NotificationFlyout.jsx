@@ -1,0 +1,171 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Bell, CheckCheck, Trash2, Clock, AlertTriangle, Sparkles, ExternalLink } from 'lucide-react';
+import { notificationService } from '../../services/notificationService';
+import { formatDistanceToNow } from 'date-fns';
+import { useToast } from '../../context/ToastContext';
+
+export const NotificationFlyout = ({ isOpen, onClose, onNotificationCountChange }) => {
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const flyoutRef = useRef(null);
+  const toast = useToast();
+
+  const fetchNotifications = async () => {
+    setLoading(true);
+    try {
+      const res = await notificationService.getNotifications({ limit: 20 });
+      if (res.success && res.data) {
+        setNotifications(res.data);
+        if (onNotificationCountChange) {
+          onNotificationCountChange(res.unreadCount || 0);
+        }
+      }
+    } catch (err) {
+      console.error('[NotificationFlyout] Failed to load:', err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      fetchNotifications();
+    }
+  }, [isOpen]);
+
+  // Click outside to close
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (flyoutRef.current && !flyoutRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen, onClose]);
+
+  const handleMarkAsRead = async (id) => {
+    try {
+      await notificationService.markAsRead(id);
+      setNotifications((prev) =>
+        prev.map((n) => (n._id === id ? { ...n, isRead: true } : n))
+      );
+      if (onNotificationCountChange) {
+        onNotificationCountChange((prev) => Math.max(0, prev - 1));
+      }
+    } catch (err) {
+      toast.error('Could not mark notification as read');
+    }
+  };
+
+  const handleMarkAllRead = async () => {
+    try {
+      await notificationService.markAllAsRead();
+      setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
+      if (onNotificationCountChange) onNotificationCountChange(0);
+      toast.success('All notifications marked as read');
+    } catch (err) {
+      toast.error('Could not mark all as read');
+    }
+  };
+
+  const handleDelete = async (id, e) => {
+    e.stopPropagation();
+    try {
+      await notificationService.deleteNotification(id);
+      setNotifications((prev) => prev.filter((n) => n._id !== id));
+      toast.info('Notification removed');
+    } catch (err) {
+      toast.error('Could not delete notification');
+    }
+  };
+
+  const getNotificationIcon = (type, priority) => {
+    if (priority === 'URGENT' || type === 'TASK_OVERDUE') {
+      return <AlertTriangle className="w-4 h-4 text-rose-400" />;
+    }
+    if (type === 'TASK_DUE') {
+      return <Clock className="w-4 h-4 text-amber-400" />;
+    }
+    return <Sparkles className="w-4 h-4 text-indigo-400" />;
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          ref={flyoutRef}
+          initial={{ opacity: 0, y: 10, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 10, scale: 0.96 }}
+          transition={{ duration: 0.15 }}
+          className="absolute right-0 top-14 w-80 sm:w-96 glass-panel rounded-2xl p-4 shadow-2xl border border-white/10 z-50 max-h-[500px] flex flex-col"
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div className="flex items-center gap-2">
+              <Bell className="w-4 h-4 text-indigo-400" />
+              <h4 className="text-sm font-bold text-white">Notifications</h4>
+            </div>
+            {notifications.some((n) => !n.isRead) && (
+              <button
+                onClick={handleMarkAllRead}
+                className="text-xs text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1 transition-colors"
+              >
+                <CheckCheck className="w-3.5 h-3.5" />
+                Mark all read
+              </button>
+            )}
+          </div>
+
+          {/* List */}
+          <div className="overflow-y-auto flex-1 divide-y divide-white/5 py-1 -mx-2 px-2">
+            {loading ? (
+              <div className="py-8 text-center text-xs text-slate-400">Loading notifications...</div>
+            ) : notifications.length === 0 ? (
+              <div className="py-8 text-center">
+                <Bell className="w-8 h-8 text-slate-600 mx-auto mb-2 opacity-50" />
+                <p className="text-xs text-slate-400">No new notifications</p>
+              </div>
+            ) : (
+              notifications.map((n) => (
+                <div
+                  key={n._id}
+                  onClick={() => !n.isRead && handleMarkAsRead(n._id)}
+                  className={`p-3 rounded-xl transition-all cursor-pointer flex items-start gap-3 my-1 ${
+                    n.isRead
+                      ? 'opacity-65 hover:opacity-100 hover:bg-white/5'
+                      : 'bg-indigo-500/10 border border-indigo-500/20 hover:bg-indigo-500/15'
+                  }`}
+                >
+                  <div className="mt-0.5 shrink-0 p-1.5 rounded-lg bg-slate-900 border border-slate-700/50">
+                    {getNotificationIcon(n.type, n.priority)}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-1">
+                      <h5 className="text-xs font-semibold text-white truncate">{n.title}</h5>
+                      <span className="text-[10px] text-slate-500 shrink-0">
+                        {n.createdAt ? formatDistanceToNow(new Date(n.createdAt), { addSuffix: true }) : ''}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-300 mt-0.5 leading-snug line-clamp-2">{n.message}</p>
+                  </div>
+                  <button
+                    onClick={(e) => handleDelete(n._id, e)}
+                    className="text-slate-500 hover:text-rose-400 p-1 rounded-md opacity-0 group-hover:opacity-100 hover:bg-white/5 transition-all"
+                    title="Delete notification"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
