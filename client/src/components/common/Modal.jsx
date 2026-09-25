@@ -34,7 +34,7 @@ export const Modal = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/75 backdrop-blur-md"
+            className="fixed inset-0 bg-black/85 backdrop-blur-md"
           />
 
           {/* Modal Card */}
@@ -43,13 +43,13 @@ export const Modal = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className={`relative w-full ${maxWidth} glass-panel rounded-2xl p-6 sm:p-7 shadow-2xl border border-white/10 z-10 my-8`}
+            className={`relative w-full ${maxWidth} glass-panel rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/15 z-10 my-8 shadow-glow-lg`}
           >
             {/* Header */}
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-white/10 mb-6">
               <div>
-                <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">{title}</h3>
-                {subtitle && <p className="text-xs sm:text-sm text-slate-400 mt-1">{subtitle}</p>}
+                <h3 className="text-lg sm:text-xl font-black text-white tracking-tight">{title}</h3>
+                {subtitle && <p className="text-xs sm:text-sm text-slate-300 mt-1">{subtitle}</p>}
               </div>
               <button
                 onClick={onClose}

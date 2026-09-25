@@ -36,26 +36,26 @@ export const ToastProvider = ({ children }) => {
   const getIcon = (type) => {
     switch (type) {
       case 'success':
-        return <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />;
+        return <CheckCircle2 className="w-5 h-5 text-red-400 shrink-0" />;
       case 'error':
         return <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />;
       case 'warning':
-        return <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0" />;
+        return <AlertTriangle className="w-5 h-5 text-amber-300 shrink-0" />;
       default:
-        return <Info className="w-5 h-5 text-indigo-400 shrink-0" />;
+        return <Info className="w-5 h-5 text-white shrink-0" />;
     }
   };
 
   const getBorderColor = (type) => {
     switch (type) {
       case 'success':
-        return 'border-emerald-500/30 bg-emerald-950/40';
+        return 'border-red-500/40 bg-red-950/70 shadow-glow';
       case 'error':
-        return 'border-rose-500/30 bg-rose-950/40';
+        return 'border-rose-500/50 bg-rose-950/80 shadow-glow-lg';
       case 'warning':
-        return 'border-amber-500/30 bg-amber-950/40';
+        return 'border-amber-500/40 bg-amber-950/70 shadow-[0_0_20px_rgba(245,158,11,0.25)]';
       default:
-        return 'border-indigo-500/30 bg-indigo-950/40';
+        return 'border-white/20 bg-black/70 shadow-glow-white';
     }
   };
 
@@ -70,14 +70,14 @@ export const ToastProvider = ({ children }) => {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.15 } }}
-              className={`pointer-events-auto flex items-start gap-3 p-4 rounded-xl border backdrop-blur-xl shadow-2xl ${getBorderColor(
+              className={`pointer-events-auto flex items-start gap-3 p-4 rounded-2xl border backdrop-blur-2xl shadow-2xl ${getBorderColor(
                 item.type
               )}`}
             >
               {getIcon(item.type)}
               <div className="flex-1 min-w-0">
-                {item.title && <h5 className="text-sm font-semibold text-white">{item.title}</h5>}
-                <p className="text-xs text-slate-300 mt-0.5 leading-relaxed break-words">{item.message}</p>
+                {item.title && <h5 className="text-sm font-bold text-white tracking-tight">{item.title}</h5>}
+                <p className="text-xs text-slate-200 mt-0.5 leading-relaxed break-words">{item.message}</p>
               </div>
               <button
                 onClick={() => removeToast(item.id)}

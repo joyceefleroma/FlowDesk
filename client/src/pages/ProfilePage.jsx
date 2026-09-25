@@ -50,7 +50,7 @@ export const ProfilePage = () => {
         <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
           Profile & Preferences
         </h2>
-        <p className="text-xs sm:text-sm text-slate-400">
+        <p className="text-xs sm:text-sm text-white/60">
           Manage your account profile, timezone localization, and automation notification settings.
         </p>
       </div>
@@ -59,7 +59,7 @@ export const ProfilePage = () => {
         {/* Profile Details Card */}
         <div className="glass-panel rounded-3xl p-6 sm:p-7 border border-white/10 space-y-4">
           <div className="flex items-center gap-2 pb-3 border-b border-white/10 text-sm font-bold text-white">
-            <User className="w-4 h-4 text-indigo-400" />
+            <User className="w-4 h-4 text-brand-lightRed" />
             Account Information
           </div>
 
@@ -93,14 +93,14 @@ export const ProfilePage = () => {
         {/* Automation Preferences Card */}
         <div className="glass-panel rounded-3xl p-6 sm:p-7 border border-white/10 space-y-4">
           <div className="flex items-center gap-2 pb-3 border-b border-white/10 text-sm font-bold text-white">
-            <Sliders className="w-4 h-4 text-cyan-400" />
+            <Sliders className="w-4 h-4 text-white" />
             Automation & Notification Preferences
           </div>
 
-          <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+          <div className="flex items-center justify-between p-3.5 rounded-xl bg-white/[0.03] border border-white/10">
             <div>
               <h5 className="text-xs font-bold text-white">In-App Notifications</h5>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-white/60">
                 Receive live alerts and toast notifications when workflows execute
               </p>
             </div>
@@ -111,12 +111,12 @@ export const ProfilePage = () => {
                 onChange={(e) => setInAppNotifications(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+              <div className="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-red"></div>
             </label>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-white/60 mb-1.5">
               Default Upcoming Deadline Notice Window (Hours)
             </label>
             <input
@@ -125,7 +125,7 @@ export const ProfilePage = () => {
               max={168}
               value={advanceHours}
               onChange={(e) => setAdvanceHours(Number(e.target.value))}
-              className="w-full sm:w-48 rounded-xl bg-slate-900 border border-slate-700/60 px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+              className="w-full sm:w-48 rounded-xl bg-white/[0.04] border border-white/10 px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-brand-red focus:bg-white/[0.06] transition-all"
             />
           </div>
         </div>

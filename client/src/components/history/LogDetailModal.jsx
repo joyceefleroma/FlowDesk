@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from '../common/Modal';
 import { Badge } from '../common/Badge';
 import { format } from 'date-fns';
-import { Zap, Clock, CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
+import { CheckCircle2, AlertCircle } from 'lucide-react';
 
 export const LogDetailModal = ({ isOpen, onClose, log }) => {
   if (!log) return null;
@@ -17,27 +17,27 @@ export const LogDetailModal = ({ isOpen, onClose, log }) => {
     >
       <div className="space-y-4">
         {/* Top summary row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 rounded-xl bg-slate-900/80 border border-white/10 text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-black/50 border border-white/10 text-xs backdrop-blur-md">
           <div>
-            <span className="text-slate-500 block text-[10px] uppercase font-bold">Status</span>
+            <span className="text-slate-400 block text-[10px] uppercase font-bold">Status</span>
             <Badge variant={log.status.toLowerCase()} size="sm" dot className="mt-1">
               {log.status}
             </Badge>
           </div>
 
           <div>
-            <span className="text-slate-500 block text-[10px] uppercase font-bold">Trigger</span>
-            <span className="font-semibold text-white mt-1 block truncate">{log.triggerType}</span>
+            <span className="text-slate-400 block text-[10px] uppercase font-bold">Trigger</span>
+            <span className="font-bold text-white mt-1 block truncate font-mono text-[11px]">{log.triggerType}</span>
           </div>
 
           <div>
-            <span className="text-slate-500 block text-[10px] uppercase font-bold">Duration</span>
-            <span className="font-mono text-slate-300 mt-1 block">{log.executionDurationMs || 0} ms</span>
+            <span className="text-slate-400 block text-[10px] uppercase font-bold">Duration</span>
+            <span className="font-mono text-red-400 mt-1 block font-bold">{log.executionDurationMs || 0} ms</span>
           </div>
 
           <div>
-            <span className="text-slate-500 block text-[10px] uppercase font-bold">Executed At</span>
-            <span className="text-slate-300 mt-1 block">
+            <span className="text-slate-400 block text-[10px] uppercase font-bold">Executed At</span>
+            <span className="text-slate-200 mt-1 block font-mono text-[11px]">
               {log.createdAt ? format(new Date(log.createdAt), 'MMM d, HH:mm:ss') : 'N/A'}
             </span>
           </div>
@@ -45,35 +45,35 @@ export const LogDetailModal = ({ isOpen, onClose, log }) => {
 
         {/* Affected Task */}
         {log.taskTitle && (
-          <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs flex items-center justify-between">
+          <div className="p-3.5 rounded-2xl bg-black/40 border border-white/10 text-xs flex items-center justify-between backdrop-blur-md">
             <span className="text-slate-400">Target Task:</span>
-            <span className="text-white font-semibold">{log.taskTitle}</span>
+            <span className="text-white font-bold">{log.taskTitle}</span>
           </div>
         )}
 
         {/* Evaluated Conditions */}
         {log.evaluatedConditions?.length > 0 && (
           <div>
-            <h5 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+            <h5 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
               Evaluated Filter Conditions
             </h5>
             <div className="space-y-1.5">
               {log.evaluatedConditions.map((cond, idx) => (
                 <div
                   key={idx}
-                  className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 text-xs flex items-center justify-between"
+                  className="p-3 rounded-xl bg-black/40 border border-white/10 text-xs flex items-center justify-between backdrop-blur-md"
                 >
                   <div className="flex items-center gap-2">
                     {cond.passed ? (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-red-400 shrink-0" />
                     ) : (
-                      <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
+                      <AlertCircle className="w-4 h-4 text-slate-500 shrink-0" />
                     )}
-                    <span className="text-slate-200 font-medium">{cond.field}</span>
-                    <span className="text-slate-500">{cond.operator}</span>
-                    <span className="text-indigo-300 font-mono">{String(cond.expectedValue)}</span>
+                    <span className="text-white font-bold">{cond.field}</span>
+                    <span className="text-slate-400">{cond.operator}</span>
+                    <span className="text-red-300 font-mono font-semibold">{String(cond.expectedValue)}</span>
                   </div>
-                  <span className="text-slate-400 font-mono text-[11px]">
+                  <span className="text-slate-300 font-mono text-[11px]">
                     Actual: {String(cond.actualValue ?? 'null')}
                   </span>
                 </div>
@@ -85,20 +85,20 @@ export const LogDetailModal = ({ isOpen, onClose, log }) => {
         {/* Actions Executed */}
         {log.actionsExecuted?.length > 0 && (
           <div>
-            <h5 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+            <h5 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
               Executed Actions
             </h5>
             <div className="space-y-1.5">
               {log.actionsExecuted.map((act, idx) => (
                 <div
                   key={idx}
-                  className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 text-xs flex items-center justify-between"
+                  className="p-3 rounded-xl bg-black/40 border border-white/10 text-xs flex items-center justify-between backdrop-blur-md"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                    <span className="text-white font-medium">{act.type.replace(/_/g, ' ')}</span>
+                    <span className="w-2 h-2 rounded-full bg-red-500 shadow-glow" />
+                    <span className="text-white font-bold">{act.type.replace(/_/g, ' ')}</span>
                   </div>
-                  <span className="text-emerald-300">{act.resultMessage}</span>
+                  <span className="text-red-200 font-medium">{act.resultMessage}</span>
                 </div>
               ))}
             </div>
@@ -107,7 +107,7 @@ export const LogDetailModal = ({ isOpen, onClose, log }) => {
 
         {/* Error message if failed */}
         {log.errorMessage && (
-          <div className="p-3.5 rounded-xl bg-rose-950/40 border border-rose-500/30 text-rose-300 text-xs">
+          <div className="p-4 rounded-2xl bg-red-950/60 border border-red-500/50 text-red-200 text-xs shadow-glow">
             <h6 className="font-bold mb-1">Execution Error Details:</h6>
             <p className="font-mono text-[11px] leading-relaxed break-words">{log.errorMessage}</p>
           </div>

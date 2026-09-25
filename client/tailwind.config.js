@@ -9,26 +9,34 @@ export default {
     extend: {
       colors: {
         flow: {
-          dark: '#0a0d14',
-          card: '#111726',
-          cardBorder: 'rgba(255, 255, 255, 0.08)',
-          cardBorderHover: 'rgba(99, 102, 241, 0.3)',
-          primary: '#6366f1',
-          primaryHover: '#4f46e5',
-          cyan: '#06b6d4',
-          purple: '#8b5cf6',
-          emerald: '#10b981',
+          dark: '#0a0306',
+          darker: '#060103',
+          card: 'rgba(25, 8, 14, 0.65)',
+          cardHover: 'rgba(38, 12, 21, 0.85)',
+          cardBorder: 'rgba(255, 255, 255, 0.12)',
+          cardBorderHover: 'rgba(239, 68, 68, 0.45)',
+          primary: '#ef4444',
+          primaryHover: '#dc2626',
+          ruby: '#e11d48',
+          crimson: '#be123c',
+          scarlet: '#ff2a4b',
           rose: '#f43f5e',
-          amber: '#f59e0b',
+          accent: '#ffffff',
         }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       boxShadow: {
-        glow: '0 0 20px -5px rgba(99, 102, 241, 0.3)',
-        'glow-cyan': '0 0 20px -5px rgba(6, 182, 212, 0.3)',
-        'glow-purple': '0 0 20px -5px rgba(139, 92, 246, 0.3)',
+        glow: '0 0 25px -3px rgba(239, 68, 68, 0.4)',
+        'glow-lg': '0 0 35px -3px rgba(239, 68, 68, 0.55)',
+        'glow-white': '0 0 25px -3px rgba(255, 255, 255, 0.25)',
+        'glow-ruby': '0 0 25px -3px rgba(225, 29, 72, 0.4)',
+        'glass-card': '0 8px 32px 0 rgba(0, 0, 0, 0.45)',
+      },
+      backdropBlur: {
+        xs: '2px',
       }
     },
   },

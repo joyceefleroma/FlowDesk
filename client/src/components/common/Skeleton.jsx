@@ -7,7 +7,7 @@ export const Skeleton = ({ className = '', ...props }) => {
     <div
       className={twMerge(
         clsx(
-          'animate-pulse rounded-xl bg-slate-800/60 border border-slate-700/30',
+          'animate-pulse rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md',
           className
         )
       )}

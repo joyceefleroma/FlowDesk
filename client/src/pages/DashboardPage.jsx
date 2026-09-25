@@ -139,11 +139,11 @@ export const DashboardPage = () => {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h4 className="text-sm sm:text-base font-bold text-white tracking-tight">Recent Tasks</h4>
-              <p className="text-xs text-slate-400">Latest active and prioritized items</p>
+              <p className="text-xs text-white/60">Latest active and prioritized items</p>
             </div>
             <Link
               to="/tasks"
-              className="text-xs text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1 transition-colors"
+              className="text-xs text-brand-lightRed hover:text-white font-semibold flex items-center gap-1 transition-colors"
             >
               View all
               <ArrowRight className="w-3.5 h-3.5" />
@@ -151,7 +151,7 @@ export const DashboardPage = () => {
           </div>
 
           {data?.recentTasks?.length === 0 ? (
-            <div className="flex-1 flex flex-col items-center justify-center text-center p-6 text-slate-500 text-xs">
+            <div className="flex-1 flex flex-col items-center justify-center text-center p-6 text-white/40 text-xs">
               <CheckSquare className="w-8 h-8 opacity-40 mb-2" />
               No tasks created yet. Use the Quick Add bar above.
             </div>

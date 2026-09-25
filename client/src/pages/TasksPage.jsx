@@ -110,7 +110,7 @@ export const TasksPage = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">Task Orchestrator</h2>
-          <p className="text-xs sm:text-sm text-slate-400">
+          <p className="text-xs sm:text-sm text-white/60">
             Create and track tasks. Any change can trigger intelligent automation workflows.
           </p>
         </div>

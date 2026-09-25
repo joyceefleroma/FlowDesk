@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Zap, Mail, Lock, ArrowRight, Sparkles } from 'lucide-react';
+import { Flame, Mail, Lock, Sparkles } from 'lucide-react';
 import { Input } from '../components/common/Input';
 import { Button } from '../components/common/Button';
 import { useAuth } from '../context/AuthContext';
@@ -39,22 +39,22 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#07090e] flex items-center justify-center p-4 sm:p-6 selection:bg-indigo-500 selection:text-white relative overflow-hidden">
+    <div className="min-h-screen bg-[#080204] flex items-center justify-center p-4 sm:p-6 selection:bg-red-600 selection:text-white relative overflow-hidden">
       {/* Background glow accents */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-600/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-rose-600/15 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="w-full max-w-md glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl relative z-10">
+      <div className="w-full max-w-md glass-panel rounded-3xl p-6 sm:p-8 border border-white/15 shadow-glow-lg relative z-10">
         {/* Brand */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2.5 mb-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center text-white shadow-glow">
-              <Zap className="w-5 h-5 fill-white text-white" />
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-red-600 via-rose-600 to-white flex items-center justify-center text-white shadow-glow">
+              <Flame className="w-5 h-5 fill-white text-white" />
             </div>
-            <span className="text-xl font-bold text-white tracking-tight">FlowDesk</span>
+            <span className="text-xl font-black text-white tracking-tight">FlowDesk</span>
           </Link>
-          <h2 className="text-2xl font-bold text-white tracking-tight">Welcome Back</h2>
-          <p className="text-xs text-slate-400 mt-1">Sign in to manage your tasks and automation rules</p>
+          <h2 className="text-2xl font-black text-white tracking-tight">Welcome Back</h2>
+          <p className="text-xs text-slate-300 mt-1">Sign in to manage your tasks and automation rules</p>
         </div>
 
         {/* Form */}
@@ -81,10 +81,10 @@ export const LoginPage = () => {
 
           <Button
             type="submit"
-            variant="glow"
+            variant="primary"
             size="lg"
             isLoading={isSubmitting}
-            className="w-full mt-2"
+            className="w-full mt-2 shadow-glow"
           >
             Sign In to FlowDesk
           </Button>
@@ -95,7 +95,7 @@ export const LoginPage = () => {
           <button
             type="button"
             onClick={fillDemoCredentials}
-            className="text-xs text-indigo-400 hover:text-indigo-300 font-semibold inline-flex items-center gap-1.5 transition-colors"
+            className="text-xs text-red-400 hover:text-red-300 font-bold inline-flex items-center gap-1.5 transition-colors cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5" />
             Use Demo Credentials
@@ -103,9 +103,9 @@ export const LoginPage = () => {
         </div>
 
         {/* Register link */}
-        <p className="text-center text-xs text-slate-400 mt-6">
+        <p className="text-center text-xs text-slate-300 mt-6">
           Don't have an account yet?{' '}
-          <Link to="/register" className="text-indigo-400 hover:text-indigo-300 font-semibold">
+          <Link to="/register" className="text-red-400 hover:text-red-300 font-bold">
             Create account
           </Link>
         </p>

@@ -3,7 +3,7 @@ import { Modal } from '../common/Modal';
 import { Input } from '../common/Input';
 import { Select } from '../common/Select';
 import { Button } from '../common/Button';
-import { Plus, Trash2, Calendar, Clock, ListTodo, Tag, CheckSquare } from 'lucide-react';
+import { Plus, Trash2, Calendar, Clock, ListTodo, Tag } from 'lucide-react';
 
 export const TaskModal = ({
   isOpen,
@@ -120,7 +120,7 @@ export const TaskModal = ({
 
         {/* Description */}
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
             Description
           </label>
           <textarea
@@ -128,7 +128,7 @@ export const TaskModal = ({
             onChange={(e) => setDescription(e.target.value)}
             rows={3}
             placeholder="Add detailed context, links, or notes..."
-            className="w-full rounded-xl bg-slate-900/80 border border-slate-700/60 text-slate-100 text-sm px-3.5 py-2.5 placeholder:text-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+            className="w-full rounded-2xl bg-black/40 border border-white/15 text-white text-sm px-3.5 py-2.5 placeholder:text-slate-400 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/25 backdrop-blur-md"
           />
         </div>
 
@@ -186,7 +186,7 @@ export const TaskModal = ({
 
         {/* Tags */}
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
             Tags (Press Enter to add)
           </label>
           <div className="flex items-center gap-2">
@@ -203,13 +203,13 @@ export const TaskModal = ({
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 px-2.5 py-0.5 rounded-full flex items-center gap-1.5"
+                  className="text-xs bg-red-950/50 border border-red-500/40 text-red-200 px-3 py-1 rounded-full flex items-center gap-1.5 font-medium"
                 >
                   {tag}
                   <button
                     type="button"
                     onClick={() => handleRemoveTag(tag)}
-                    className="hover:text-rose-400 text-slate-400"
+                    className="hover:text-white text-red-400 font-bold ml-1 cursor-pointer"
                   >
                     &times;
                   </button>
@@ -221,8 +221,8 @@ export const TaskModal = ({
 
         {/* Subtasks Section */}
         <div className="pt-3 border-t border-white/10">
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center gap-1.5">
-            <ListTodo className="w-3.5 h-3.5 text-indigo-400" />
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <ListTodo className="w-3.5 h-3.5 text-red-400" />
             Subtasks
           </label>
           <div className="flex items-center gap-2 mb-2">
@@ -232,7 +232,7 @@ export const TaskModal = ({
               onChange={(e) => setSubtaskTitle(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAddSubtask(e)}
               placeholder="Add subtask step..."
-              className="flex-1 rounded-xl bg-slate-900/80 border border-slate-700/60 text-slate-100 text-xs px-3 py-2 placeholder:text-slate-500 focus:outline-none focus:border-indigo-500"
+              className="flex-1 rounded-2xl bg-black/40 border border-white/15 text-white text-xs px-3.5 py-2.5 placeholder:text-slate-400 focus:outline-none focus:border-red-500 backdrop-blur-md"
             />
             <Button
               type="button"
@@ -250,13 +250,13 @@ export const TaskModal = ({
               {subtasks.map((st, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between p-2 rounded-lg bg-slate-900/60 border border-slate-800 text-xs"
+                  className="flex items-center justify-between p-2.5 rounded-xl bg-black/40 border border-white/10 text-xs text-white"
                 >
-                  <span className="text-slate-200">{st.title}</span>
+                  <span>{st.title}</span>
                   <button
                     type="button"
                     onClick={() => handleRemoveSubtask(idx)}
-                    className="text-slate-500 hover:text-rose-400 p-1"
+                    className="text-slate-400 hover:text-red-400 p-1 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>

@@ -172,7 +172,7 @@ export const WorkflowBuilderPage = () => {
           <button
             type="button"
             onClick={() => navigate('/workflows')}
-            className="p-2 text-slate-400 hover:text-white rounded-xl hover:bg-white/5 transition-colors"
+            className="p-2 text-white/60 hover:text-white rounded-xl hover:bg-white/5 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
@@ -180,8 +180,8 @@ export const WorkflowBuilderPage = () => {
             <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
               {isEditMode ? 'Edit Workflow' : 'Visual Workflow Builder'}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400">
-              Configure your WHEN (Trigger) $\rightarrow$ IF (Conditions) $\rightarrow$ THEN (Actions) pipeline
+            <p className="text-xs sm:text-sm text-white/60">
+              Configure your WHEN (Trigger) → IF (Conditions) → THEN (Actions) pipeline
             </p>
           </div>
         </div>
@@ -208,8 +208,8 @@ export const WorkflowBuilderPage = () => {
       {/* Preset Templates Bar */}
       {!isEditMode && (
         <div className="glass-panel p-4 rounded-2xl border border-white/10">
-          <div className="flex items-center gap-2 mb-2 text-xs font-bold text-slate-300">
-            <Sparkles className="w-4 h-4 text-indigo-400" />
+          <div className="flex items-center gap-2 mb-2 text-xs font-bold text-white/80">
+            <Sparkles className="w-4 h-4 text-brand-lightRed" />
             Quick Start Workflow Templates:
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
@@ -218,12 +218,12 @@ export const WorkflowBuilderPage = () => {
                 key={tpl.name}
                 type="button"
                 onClick={() => handleApplyTemplate(tpl)}
-                className="p-3 text-left rounded-xl bg-slate-900/60 hover:bg-indigo-600/15 border border-slate-800 hover:border-indigo-500/40 transition-all text-xs group"
+                className="p-3 text-left rounded-xl bg-white/[0.03] hover:bg-brand-red/15 border border-white/10 hover:border-brand-red/40 transition-all text-xs group"
               >
-                <h6 className="font-semibold text-white group-hover:text-indigo-300 truncate">
+                <h6 className="font-semibold text-white group-hover:text-brand-lightRed truncate">
                   {tpl.name}
                 </h6>
-                <p className="text-[11px] text-slate-400 mt-1 line-clamp-1">{tpl.description}</p>
+                <p className="text-[11px] text-white/60 mt-1 line-clamp-1">{tpl.description}</p>
               </button>
             ))}
           </div>
@@ -244,7 +244,7 @@ export const WorkflowBuilderPage = () => {
           </div>
 
           <div className="flex items-center gap-3 self-start sm:self-center pt-2 sm:pt-6">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <label className="text-xs font-bold uppercase tracking-wider text-white/60">
               Active Status:
             </label>
             <label className="relative inline-flex items-center cursor-pointer">
@@ -254,13 +254,13 @@ export const WorkflowBuilderPage = () => {
                 onChange={(e) => setIsActive(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+              <div className="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-red"></div>
             </label>
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-white/60 mb-1.5">
             Workflow Description (Optional)
           </label>
           <input
@@ -268,22 +268,22 @@ export const WorkflowBuilderPage = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Summarize the intent and behavior of this automated rule..."
-            className="w-full rounded-xl bg-slate-900/80 border border-slate-700/60 text-slate-100 text-xs px-3.5 py-2.5 placeholder:text-slate-500 focus:outline-none focus:border-indigo-500"
+            className="w-full rounded-xl bg-white/[0.04] border border-white/10 text-white text-xs px-3.5 py-2.5 placeholder:text-white/30 focus:outline-none focus:border-brand-red focus:bg-white/[0.06] transition-all"
           />
         </div>
       </div>
 
       {/* STEP 1: WHEN (Trigger) */}
-      <div className="glass-panel p-6 rounded-3xl border border-purple-500/20 relative shadow-glow-purple">
+      <div className="glass-panel p-6 rounded-3xl border border-rose-500/20 relative shadow-glow-red">
         <div className="flex items-center gap-2.5 pb-4 border-b border-white/10 mb-5">
-          <span className="w-7 h-7 rounded-xl bg-purple-500/20 text-purple-300 font-black text-xs flex items-center justify-center border border-purple-500/30">
+          <span className="w-7 h-7 rounded-xl bg-brand-red/20 text-brand-lightRed font-black text-xs flex items-center justify-center border border-brand-red/30">
             1
           </span>
           <div>
             <h4 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
               WHEN (Trigger Event)
             </h4>
-            <p className="text-xs text-slate-400">Choose the task event that starts this automation</p>
+            <p className="text-xs text-white/60">Choose the task event that starts this automation</p>
           </div>
         </div>
 
@@ -291,16 +291,16 @@ export const WorkflowBuilderPage = () => {
       </div>
 
       {/* STEP 2: IF (Conditions) */}
-      <div className="glass-panel p-6 rounded-3xl border border-cyan-500/20 relative shadow-glow-cyan">
+      <div className="glass-panel p-6 rounded-3xl border border-white/20 relative shadow-card">
         <div className="flex items-center gap-2.5 pb-4 border-b border-white/10 mb-5">
-          <span className="w-7 h-7 rounded-xl bg-cyan-500/20 text-cyan-300 font-black text-xs flex items-center justify-center border border-cyan-500/30">
+          <span className="w-7 h-7 rounded-xl bg-white/10 text-white font-black text-xs flex items-center justify-center border border-white/20">
             2
           </span>
           <div>
             <h4 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
               IF (Condition Rules)
             </h4>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-white/60">
               Specify filters that the task must satisfy before executing actions
             </p>
           </div>
@@ -310,16 +310,16 @@ export const WorkflowBuilderPage = () => {
       </div>
 
       {/* STEP 3: THEN (Actions) */}
-      <div className="glass-panel p-6 rounded-3xl border border-emerald-500/20 relative shadow-[0_0_25px_-5px_rgba(16,185,129,0.2)]">
+      <div className="glass-panel p-6 rounded-3xl border border-brand-red/30 relative shadow-glow-red">
         <div className="flex items-center gap-2.5 pb-4 border-b border-white/10 mb-5">
-          <span className="w-7 h-7 rounded-xl bg-emerald-500/20 text-emerald-300 font-black text-xs flex items-center justify-center border border-emerald-500/30">
+          <span className="w-7 h-7 rounded-xl bg-brand-red/20 text-brand-lightRed font-black text-xs flex items-center justify-center border border-brand-red/30">
             3
           </span>
           <div>
             <h4 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
               THEN (Automated Actions)
             </h4>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-white/60">
               Define the mutations, tasks, and alerts to perform in sequence
             </p>
           </div>

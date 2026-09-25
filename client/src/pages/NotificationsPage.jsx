@@ -69,12 +69,12 @@ export const NotificationsPage = () => {
 
   const getIcon = (type, priority) => {
     if (priority === 'URGENT' || type === 'TASK_OVERDUE') {
-      return <AlertTriangle className="w-5 h-5 text-rose-400" />;
+      return <AlertTriangle className="w-5 h-5 text-brand-lightRed" />;
     }
     if (type === 'TASK_DUE') {
-      return <Clock className="w-5 h-5 text-amber-400" />;
+      return <Clock className="w-5 h-5 text-rose-400" />;
     }
-    return <Sparkles className="w-5 h-5 text-indigo-400" />;
+    return <Sparkles className="w-5 h-5 text-white" />;
   };
 
   return (
@@ -85,7 +85,7 @@ export const NotificationsPage = () => {
           <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
             Notification Center
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400">
+          <p className="text-xs sm:text-sm text-white/60">
             Automated alerts, approaching deadline triggers, and task completion notices.
           </p>
         </div>
@@ -110,8 +110,8 @@ export const NotificationsPage = () => {
             onClick={() => setFilterRead(tab)}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
               filterRead === tab
-                ? 'bg-indigo-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-brand-red text-white shadow-glow-red'
+                : 'text-white/60 hover:text-white hover:bg-white/5'
             }`}
           >
             {tab === 'ALL' ? 'All Alerts' : tab === 'UNREAD' ? 'Unread' : 'Archived'}
@@ -141,10 +141,10 @@ export const NotificationsPage = () => {
               className={`p-4 sm:p-5 rounded-2xl glass-panel border transition-all flex items-start gap-4 ${
                 n.isRead
                   ? 'opacity-70 border-white/5 hover:opacity-100 hover:border-white/10'
-                  : 'border-indigo-500/30 bg-indigo-950/20 shadow-glow cursor-pointer'
+                  : 'border-brand-red/30 bg-brand-red/10 shadow-glow-red cursor-pointer'
               }`}
             >
-              <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 shrink-0">
+              <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/10 shrink-0">
                 {getIcon(n.type, n.priority)}
               </div>
 
@@ -153,15 +153,15 @@ export const NotificationsPage = () => {
                   <div className="flex items-center gap-2">
                     <h4 className="text-sm font-bold text-white tracking-tight">{n.title}</h4>
                     {!n.isRead && (
-                      <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+                      <span className="w-2 h-2 rounded-full bg-brand-lightRed animate-pulse" />
                     )}
                   </div>
-                  <span className="text-[11px] text-slate-400 shrink-0">
+                  <span className="text-[11px] text-white/50 shrink-0">
                     {n.createdAt ? formatDistanceToNow(new Date(n.createdAt), { addSuffix: true }) : ''}
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-300 mt-1 leading-relaxed">{n.message}</p>
+                <p className="text-xs text-white/80 mt-1 leading-relaxed">{n.message}</p>
               </div>
 
               <button
@@ -169,7 +169,7 @@ export const NotificationsPage = () => {
                   e.stopPropagation();
                   handleDelete(n._id);
                 }}
-                className="p-1.5 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors shrink-0"
+                className="p-1.5 text-white/40 hover:text-brand-lightRed hover:bg-white/10 rounded-lg transition-colors shrink-0"
                 title="Delete notification"
               >
                 <Trash2 className="w-4 h-4" />

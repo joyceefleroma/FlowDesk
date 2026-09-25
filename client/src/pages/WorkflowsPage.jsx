@@ -71,8 +71,8 @@ export const WorkflowsPage = () => {
           <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
             Workflow Automations
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400">
-            Define intelligent Trigger $\rightarrow$ Condition $\rightarrow$ Action rules to eliminate manual busywork.
+          <p className="text-xs sm:text-sm text-white/60">
+            Define intelligent Trigger → Condition → Action rules to eliminate manual busywork.
           </p>
         </div>
 
@@ -91,8 +91,8 @@ export const WorkflowsPage = () => {
             onClick={() => setActiveFilter(tab)}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
               activeFilter === tab
-                ? 'bg-indigo-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-brand-red text-white shadow-glow-red'
+                : 'text-white/60 hover:text-white hover:bg-white/5'
             }`}
           >
             {tab === 'ALL' ? 'All Workflows' : tab === 'ACTIVE' ? 'Active Only' : 'Disabled'}

@@ -55,7 +55,7 @@ export const AutomationHistoryPage = () => {
         <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
           Automation Execution Telemetry
         </h2>
-        <p className="text-xs sm:text-sm text-slate-400">
+        <p className="text-xs sm:text-sm text-white/60">
           Full execution audit trail showing trigger origin, evaluated conditions, and action outcomes.
         </p>
       </div>
@@ -97,7 +97,7 @@ export const AutomationHistoryPage = () => {
 
       {/* Filter Bar */}
       <div className="glass-panel p-4 rounded-2xl border border-white/10 flex flex-wrap items-center gap-3">
-        <div className="flex items-center gap-1.5 text-slate-400 text-xs font-semibold uppercase">
+        <div className="flex items-center gap-1.5 text-white/60 text-xs font-semibold uppercase">
           <Filter className="w-3.5 h-3.5" />
           Filter:
         </div>
@@ -106,11 +106,11 @@ export const AutomationHistoryPage = () => {
         <select
           value={selectedWorkflow}
           onChange={(e) => setSelectedWorkflow(e.target.value)}
-          className="rounded-xl bg-slate-900 border border-slate-700/60 px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+          className="rounded-xl bg-white/[0.04] border border-white/10 px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-red transition-all"
         >
-          <option value="">All Workflows</option>
+          <option value="" className="bg-[#12090d] text-white">All Workflows</option>
           {workflows.map((w) => (
-            <option key={w._id} value={w._id}>
+            <option key={w._id} value={w._id} className="bg-[#12090d] text-white">
               {w.name}
             </option>
           ))}
@@ -120,12 +120,12 @@ export const AutomationHistoryPage = () => {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="rounded-xl bg-slate-900 border border-slate-700/60 px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+          className="rounded-xl bg-white/[0.04] border border-white/10 px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-red transition-all"
         >
-          <option value="ALL">All Statuses</option>
-          <option value="SUCCESS">Success</option>
-          <option value="SKIPPED">Skipped (Conditions Unmet)</option>
-          <option value="FAILED">Failed</option>
+          <option value="ALL" className="bg-[#12090d] text-white">All Statuses</option>
+          <option value="SUCCESS" className="bg-[#12090d] text-white">Success</option>
+          <option value="SKIPPED" className="bg-[#12090d] text-white">Skipped (Conditions Unmet)</option>
+          <option value="FAILED" className="bg-[#12090d] text-white">Failed</option>
         </select>
       </div>
 

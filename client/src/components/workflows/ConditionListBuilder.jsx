@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus, Trash2, SlidersHorizontal, Info } from 'lucide-react';
+import { Plus, Trash2, Info } from 'lucide-react';
 import { Button } from '../common/Button';
 
 const FIELDS = [
@@ -52,7 +52,7 @@ export const ConditionListBuilder = ({ conditions = [], onChange }) => {
   const renderValueInput = (cond, index) => {
     if (cond.operator === 'IS_EMPTY' || cond.operator === 'IS_NOT_EMPTY') {
       return (
-        <span className="text-xs text-slate-500 italic py-2 px-3 bg-slate-900/40 rounded-xl border border-slate-800">
+        <span className="text-xs text-slate-400 italic py-2.5 px-3.5 bg-black/40 rounded-2xl border border-white/10 block">
           No value needed
         </span>
       );
@@ -63,12 +63,12 @@ export const ConditionListBuilder = ({ conditions = [], onChange }) => {
         <select
           value={cond.value || 'TODO'}
           onChange={(e) => handleUpdateCondition(index, { value: e.target.value })}
-          className="rounded-xl bg-slate-900 border border-slate-700/60 px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 w-full"
+          className="rounded-2xl bg-black/50 border border-white/15 px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 w-full backdrop-blur-md cursor-pointer"
         >
-          <option value="TODO">To Do</option>
-          <option value="IN_PROGRESS">In Progress</option>
-          <option value="COMPLETED">Completed</option>
-          <option value="OVERDUE">Overdue</option>
+          <option value="TODO" className="bg-[#150409]">To Do</option>
+          <option value="IN_PROGRESS" className="bg-[#150409]">In Progress</option>
+          <option value="COMPLETED" className="bg-[#150409]">Completed</option>
+          <option value="OVERDUE" className="bg-[#150409]">Overdue</option>
         </select>
       );
     }
@@ -78,12 +78,12 @@ export const ConditionListBuilder = ({ conditions = [], onChange }) => {
         <select
           value={cond.value || 'MEDIUM'}
           onChange={(e) => handleUpdateCondition(index, { value: e.target.value })}
-          className="rounded-xl bg-slate-900 border border-slate-700/60 px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 w-full"
+          className="rounded-2xl bg-black/50 border border-white/15 px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 w-full backdrop-blur-md cursor-pointer"
         >
-          <option value="LOW">Low</option>
-          <option value="MEDIUM">Medium</option>
-          <option value="HIGH">High</option>
-          <option value="URGENT">Urgent</option>
+          <option value="LOW" className="bg-[#150409]">Low</option>
+          <option value="MEDIUM" className="bg-[#150409]">Medium</option>
+          <option value="HIGH" className="bg-[#150409]">High</option>
+          <option value="URGENT" className="bg-[#150409]">Urgent</option>
         </select>
       );
     }
@@ -98,7 +98,7 @@ export const ConditionListBuilder = ({ conditions = [], onChange }) => {
         value={cond.value || ''}
         onChange={(e) => handleUpdateCondition(index, { value: e.target.value })}
         placeholder="Enter comparison value..."
-        className="rounded-xl bg-slate-900 border border-slate-700/60 px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-indigo-500 w-full"
+        className="rounded-2xl bg-black/40 border border-white/15 px-3.5 py-2.5 text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-red-500 w-full backdrop-blur-md"
       />
     );
   };
@@ -106,8 +106,8 @@ export const ConditionListBuilder = ({ conditions = [], onChange }) => {
   return (
     <div className="space-y-3">
       {conditions.length === 0 ? (
-        <div className="p-4 rounded-xl border border-dashed border-slate-800 text-center text-xs text-slate-400 bg-slate-900/30">
-          <Info className="w-4 h-4 mx-auto mb-1 text-slate-500" />
+        <div className="p-4 rounded-2xl border border-dashed border-white/15 text-center text-xs text-slate-300 bg-black/30 backdrop-blur-md">
+          <Info className="w-4 h-4 mx-auto mb-1 text-red-400" />
           No conditions configured. This workflow will run on <strong>ALL</strong> instances of the trigger.
         </div>
       ) : (
@@ -115,11 +115,11 @@ export const ConditionListBuilder = ({ conditions = [], onChange }) => {
           {conditions.map((cond, idx) => (
             <div
               key={idx}
-              className="p-3.5 rounded-2xl bg-slate-900/80 border border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
+              className="p-4 rounded-3xl bg-black/40 border border-white/15 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 backdrop-blur-xl shadow-glow"
             >
               {/* Field Selector */}
               <div className="w-full sm:w-1/3">
-                <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
+                <label className="text-[10px] uppercase font-bold text-slate-300 block mb-1">
                   Field
                 </label>
                 <select
@@ -132,10 +132,10 @@ export const ConditionListBuilder = ({ conditions = [], onChange }) => {
                     if (field === 'dueDateDistanceHours') defVal = 24;
                     handleUpdateCondition(idx, { field, value: defVal });
                   }}
-                  className="w-full rounded-xl bg-slate-900 border border-slate-700/60 px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                  className="w-full rounded-2xl bg-black/50 border border-white/15 px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 backdrop-blur-md cursor-pointer"
                 >
                   {FIELDS.map((f) => (
-                    <option key={f.value} value={f.value}>
+                    <option key={f.value} value={f.value} className="bg-[#150409]">
                       {f.label}
                     </option>
                   ))}
@@ -144,16 +144,16 @@ export const ConditionListBuilder = ({ conditions = [], onChange }) => {
 
               {/* Operator Selector */}
               <div className="w-full sm:w-1/3">
-                <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
+                <label className="text-[10px] uppercase font-bold text-slate-300 block mb-1">
                   Operator
                 </label>
                 <select
                   value={cond.operator}
                   onChange={(e) => handleUpdateCondition(idx, { operator: e.target.value })}
-                  className="w-full rounded-xl bg-slate-900 border border-slate-700/60 px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                  className="w-full rounded-2xl bg-black/50 border border-white/15 px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 backdrop-blur-md cursor-pointer"
                 >
                   {OPERATORS.map((op) => (
-                    <option key={op.value} value={op.value}>
+                    <option key={op.value} value={op.value} className="bg-[#150409]">
                       {op.label}
                     </option>
                   ))}
@@ -162,7 +162,7 @@ export const ConditionListBuilder = ({ conditions = [], onChange }) => {
 
               {/* Value Input */}
               <div className="w-full sm:w-1/3">
-                <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
+                <label className="text-[10px] uppercase font-bold text-slate-300 block mb-1">
                   Expected Value
                 </label>
                 {renderValueInput(cond, idx)}
@@ -173,7 +173,7 @@ export const ConditionListBuilder = ({ conditions = [], onChange }) => {
                 <button
                   type="button"
                   onClick={() => handleRemoveCondition(idx)}
-                  className="p-2 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors w-full sm:w-auto flex items-center justify-center"
+                  className="p-2.5 text-slate-400 hover:text-red-400 hover:bg-red-500/15 rounded-2xl transition-colors w-full sm:w-auto flex items-center justify-center cursor-pointer"
                   title="Remove condition"
                 >
                   <Trash2 className="w-4 h-4" />

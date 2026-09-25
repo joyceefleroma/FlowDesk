@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Menu, Bell, Search, Plus, Zap, CheckSquare } from 'lucide-react';
+import { Menu, Bell, Zap } from 'lucide-react';
 import { Button } from '../common/Button';
 import { NotificationFlyout } from './NotificationFlyout';
 import { notificationService } from '../../services/notificationService';
@@ -43,31 +43,30 @@ export const TopHeader = ({ onOpenMobileMenu }) => {
   const meta = getPageMeta();
 
   return (
-    <header className="h-16 px-4 sm:px-8 border-b border-white/10 bg-[#07090e]/80 backdrop-blur-md flex items-center justify-between sticky top-0 z-30">
+    <header className="h-16 px-4 sm:px-8 border-b border-white/10 bg-[#0c0205]/75 backdrop-blur-2xl flex items-center justify-between sticky top-0 z-30 shadow-md">
       {/* Left: Mobile Menu Toggle & Title */}
       <div className="flex items-center gap-3">
         <button
           onClick={onOpenMobileMenu}
-          className="lg:hidden p-2 text-slate-400 hover:text-white rounded-xl hover:bg-white/5"
+          className="lg:hidden p-2 text-slate-300 hover:text-white rounded-xl hover:bg-white/10"
         >
           <Menu className="w-5 h-5" />
         </button>
         <div>
-          <h2 className="text-base sm:text-lg font-bold text-white tracking-tight">{meta.title}</h2>
-          <p className="text-xs text-slate-400 hidden sm:block">{meta.desc}</p>
+          <h2 className="text-base sm:text-lg font-black text-white tracking-tight">{meta.title}</h2>
+          <p className="text-xs text-slate-300 hidden sm:block">{meta.desc}</p>
         </div>
       </div>
 
       {/* Right: Quick Actions & Notifications */}
       <div className="flex items-center gap-3">
-        {/* Quick Workflow or Task Create Button */}
         {location.pathname !== '/workflows/new' && (
           <Button
             size="sm"
-            variant="glow"
+            variant="primary"
             icon={Zap}
             onClick={() => navigate('/workflows/new')}
-            className="hidden sm:inline-flex"
+            className="hidden sm:inline-flex shadow-glow"
           >
             New Workflow
           </Button>
@@ -77,12 +76,12 @@ export const TopHeader = ({ onOpenMobileMenu }) => {
         <div className="relative">
           <button
             onClick={() => setIsFlyoutOpen((prev) => !prev)}
-            className="relative p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 border border-white/5 transition-colors"
+            className="relative p-2.5 rounded-xl text-slate-200 hover:text-white hover:bg-white/10 border border-white/10 transition-colors backdrop-blur-md"
             title="Notifications"
           >
             <Bell className="w-5 h-5" />
             {unreadCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-indigo-500 text-[10px] font-bold text-white flex items-center justify-center animate-pulse">
+              <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-red-600 text-[10px] font-black text-white flex items-center justify-center animate-pulse shadow-glow">
                 {unreadCount > 9 ? '9+' : unreadCount}
               </span>
             )}

@@ -8,8 +8,7 @@ import {
   Bell,
   User,
   LogOut,
-  Sparkles,
-  Layers
+  Flame
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -32,45 +31,45 @@ export const Sidebar = ({ onCloseMobile }) => {
   ];
 
   return (
-    <aside className="w-64 h-screen bg-[#090d16] border-r border-white/10 flex flex-col justify-between shrink-0">
+    <aside className="w-64 h-screen bg-[#0d0205]/75 backdrop-blur-2xl border-r border-white/10 flex flex-col justify-between shrink-0 shadow-2xl">
       {/* Brand Header */}
       <div>
-        <div className="p-6 pb-5 flex items-center gap-3 border-b border-white/5">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 flex items-center justify-center text-white shadow-glow">
-            <Zap className="w-5 h-5 fill-white text-white" />
+        <div className="p-6 pb-5 flex items-center gap-3 border-b border-white/10">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-red-600 via-rose-600 to-white flex items-center justify-center text-white shadow-glow">
+            <Flame className="w-5 h-5 fill-white text-white" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-white tracking-tight flex items-center gap-1.5">
+            <h1 className="text-base font-black text-white tracking-tight flex items-center gap-1.5">
               FlowDesk
-              <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              <span className="text-[10px] uppercase font-mono font-bold px-1.5 py-0.5 rounded-md bg-red-600/25 text-red-200 border border-red-500/40">
                 PRO
               </span>
             </h1>
-            <p className="text-[11px] text-slate-400">Workflow Automation</p>
+            <p className="text-[11px] text-slate-300 font-medium">Personal Orchestrator</p>
           </div>
         </div>
 
         {/* Navigation links */}
-        <nav className="p-3 space-y-1 mt-2">
+        <nav className="p-3 space-y-1.5 mt-2">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               onClick={onCloseMobile}
               className={({ isActive }) =>
-                `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
+                `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
                   isActive
-                    ? 'bg-indigo-600/15 text-indigo-400 border border-indigo-500/30 font-semibold shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                    ? 'bg-gradient-to-r from-red-600/25 to-rose-600/15 text-white border border-red-500/50 shadow-glow'
+                    : 'text-slate-300 hover:text-white hover:bg-white/10 hover:border-white/10 border border-transparent'
                 }`
               }
             >
               <div className="flex items-center gap-3">
-                <item.icon className="w-4 h-4 shrink-0" />
+                <item.icon className="w-4 h-4 shrink-0 text-red-400" />
                 <span>{item.label}</span>
               </div>
               {item.badge && (
-                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-500/20 text-red-200 border border-red-500/40">
                   {item.badge}
                 </span>
               )}
@@ -80,21 +79,21 @@ export const Sidebar = ({ onCloseMobile }) => {
       </div>
 
       {/* Footer Profile & Logout */}
-      <div className="p-4 border-t border-white/10 bg-black/20">
-        <div className="flex items-center justify-between gap-3 p-2 rounded-xl bg-slate-900/60 border border-white/5">
+      <div className="p-4 border-t border-white/10 bg-black/40">
+        <div className="flex items-center justify-between gap-3 p-2.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white text-xs font-bold uppercase shadow-sm shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-red-600 to-rose-500 flex items-center justify-center text-white text-xs font-black uppercase shadow-glow shrink-0">
               {user?.name ? user.name.charAt(0) : 'U'}
             </div>
             <div className="min-w-0">
-              <h5 className="text-xs font-semibold text-white truncate">{user?.name || 'User'}</h5>
-              <p className="text-[10px] text-slate-400 truncate">{user?.email || 'user@flowdesk.io'}</p>
+              <h5 className="text-xs font-bold text-white truncate">{user?.name || 'User'}</h5>
+              <p className="text-[10px] text-slate-300 truncate">{user?.email || 'user@flowdesk.io'}</p>
             </div>
           </div>
           <button
             onClick={handleLogout}
             title="Log out"
-            className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors shrink-0"
+            className="p-1.5 text-slate-400 hover:text-red-400 hover:bg-red-500/15 rounded-xl transition-colors shrink-0"
           >
             <LogOut className="w-4 h-4" />
           </button>
