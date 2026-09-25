@@ -10,25 +10,80 @@ const { apiLimiter } = require('./middleware/rateLimiter');
 
 const app = express();
 
+// Trust proxy for Render/Vercel reverse proxies (accurate req.ip and rate-limiting)
+app.set('trust proxy', 1);
+
 // Security and utility middlewares
 app.use(helmet({
   contentSecurityPolicy: false, // Allows flexible CDN font/script loading in production
+  crossOriginEmbedderPolicy: false,
 }));
 
-const allowedOrigins = process.env.CLIENT_URL
-  ? process.env.CLIENT_URL.split(',').map((url) => url.trim())
-  : ['http://localhost:5173', 'http://localhost:5174'];
-
-app.use(cors({
+// Robust Universal CORS handling for Localhost, Vercel preview/production, and Render
+const corsOptions = {
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps, curl, server-to-server)
-    if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+    // Allow requests with no origin (curl, mobile, server-to-server, Postman)
+    if (!origin) return callback(null, true);
+
+    // Allow localhost, 127.0.0.1 on any port
+    if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
       return callback(null, true);
     }
-    return callback(null, true); // Permissive in deployment to prevent unexpected CORS blocks
+
+    // Allow all Vercel deployment and preview URLs (*.vercel.app)
+    if (/^https:\/\/.*\.vercel\.app$/.test(origin)) {
+      return callback(null, true);
+    }
+
+    // Allow Render domains (*.onrender.com)
+    if (/^https:\/\/.*\.onrender\.com$/.test(origin)) {
+      return callback(null, true);
+    }
+
+    // Allow custom CLIENT_URL environment variables
+    if (process.env.CLIENT_URL) {
+      const allowed = process.env.CLIENT_URL.split(',').map((u) => u.trim());
+      if (allowed.includes('*') || allowed.includes(origin)) {
+        return callback(null, true);
+      }
+    }
+
+    // Default permissive reflection for production resilience
+    return callback(null, true);
   },
-  credentials: true
-}));
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'Accept',
+    'Origin',
+    'Cache-Control',
+    'Pragma'
+  ],
+  exposedHeaders: ['Authorization', 'Set-Cookie'],
+  optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
+
+// Explicit preflight handler
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    const origin = req.headers.origin;
+    if (origin) {
+      res.header('Access-Control-Allow-Origin', origin);
+      res.header('Access-Control-Allow-Credentials', 'true');
+    } else {
+      res.header('Access-Control-Allow-Origin', '*');
+    }
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS,HEAD');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-Requested-With,Accept,Origin,Cache-Control,Pragma');
+    return res.sendStatus(204);
+  }
+  next();
+});
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
