@@ -47,40 +47,40 @@ export const WorkflowUniverseCanvas = ({ scrollProgress = 0 }) => {
     }
     scene.add(universeGroup);
 
-    // 2. Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
+    // 2. Lighting (Red + Warm Gold + Crisp White)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
     scene.add(ambientLight);
 
-    const cyanLight = new THREE.PointLight(0x06b6d4, 3.5, 45);
-    cyanLight.position.set(8, 6, 8);
-    scene.add(cyanLight);
+    const amberGoldLight = new THREE.PointLight(0xfbbf24, 4.0, 50);
+    amberGoldLight.position.set(8, 6, 8);
+    scene.add(amberGoldLight);
 
-    const violetLight = new THREE.PointLight(0x8b5cf6, 3, 40);
-    violetLight.position.set(12, -6, 6);
-    scene.add(violetLight);
-
-    const redAccentLight = new THREE.PointLight(0xff1e42, 2.5, 35);
-    redAccentLight.position.set(2, 4, 4);
+    const redAccentLight = new THREE.PointLight(0xef4444, 3.5, 45);
+    redAccentLight.position.set(-8, -5, 6);
     scene.add(redAccentLight);
 
+    const whiteCoreLight = new THREE.PointLight(0xffffff, 2.5, 35);
+    whiteCoreLight.position.set(0, 4, 10);
+    scene.add(whiteCoreLight);
+
     // 3. Subtle Digital Coordinate Grid
-    const gridHelper = new THREE.GridHelper(100, 50, 0x06b6d4, 0x111625);
+    const gridHelper = new THREE.GridHelper(100, 50, 0xf59e0b, 0x1f140e);
     gridHelper.position.y = -10;
-    gridHelper.material.opacity = 0.18;
+    gridHelper.material.opacity = 0.12;
     gridHelper.material.transparent = true;
     scene.add(gridHelper);
 
-    // 4. Central Workflow Network Hierarchy (Flow Engine at Center)
+    // 4. Central Workflow Network Hierarchy (Flow Engine at Center with Red + Yellow + White Palette)
     const nodeDefinitions = [
-      // Central Flow Engine Node (Primary Focal Point)
-      { id: 'engine', name: 'Flow Engine', pos: new THREE.Vector3(0, 0, 0), color: 0x06b6d4, size: isMobile ? 1.4 : 1.8, isCenter: true },
+      // Central Flow Engine Node (Primary Focal Point: Warm Radiant Gold)
+      { id: 'engine', name: 'Flow Engine', pos: new THREE.Vector3(0, 0, 0), color: 0xfbbf24, size: isMobile ? 1.4 : 1.8, isCenter: true },
       // Core Workflow Pipeline Nodes
-      { id: 'trigger', name: 'Trigger', pos: new THREE.Vector3(-6, 3.5, 1), color: 0xff1e42, size: 1.1 },
-      { id: 'condition', name: 'Condition', pos: new THREE.Vector3(-1, -4.5, 2), color: 0x8b5cf6, size: 1.0 },
-      { id: 'action', name: 'Action', pos: new THREE.Vector3(6, 3, -1), color: 0x3b82f6, size: 1.15 },
-      { id: 'automation', name: 'Automation', pos: new THREE.Vector3(6.5, -3.5, 1.5), color: 0x10b981, size: 1.0 },
+      { id: 'trigger', name: 'Trigger', pos: new THREE.Vector3(-6, 3.5, 1), color: 0xef4444, size: 1.1 },
+      { id: 'condition', name: 'Condition', pos: new THREE.Vector3(-1, -4.5, 2), color: 0xf59e0b, size: 1.0 },
+      { id: 'action', name: 'Action', pos: new THREE.Vector3(6, 3, -1), color: 0xdc2626, size: 1.15 },
+      { id: 'automation', name: 'Automation', pos: new THREE.Vector3(6.5, -3.5, 1.5), color: 0xfcd34d, size: 1.0 },
       { id: 'notification', name: 'Notification', pos: new THREE.Vector3(10, 0.5, -2), color: 0xffffff, size: 0.9 },
-      { id: 'task', name: 'Task', pos: new THREE.Vector3(-6.5, -2.5, -2), color: 0x38bdf8, size: 0.95 },
+      { id: 'task', name: 'Task', pos: new THREE.Vector3(-6.5, -2.5, -2), color: 0xfef08a, size: 0.95 },
     ];
 
     const nodesGroup = new THREE.Group();
@@ -94,7 +94,7 @@ export const WorkflowUniverseCanvas = ({ scrollProgress = 0 }) => {
       const material = new THREE.MeshStandardMaterial({
         color: def.color,
         emissive: def.color,
-        emissiveIntensity: def.isCenter ? 0.9 : 0.6,
+        emissiveIntensity: def.isCenter ? 0.95 : 0.65,
         roughness: 0.15,
         metalness: 0.85,
         wireframe: false,
@@ -108,7 +108,7 @@ export const WorkflowUniverseCanvas = ({ scrollProgress = 0 }) => {
         color: def.color,
         wireframe: true,
         transparent: true,
-        opacity: def.isCenter ? 0.45 : 0.25,
+        opacity: def.isCenter ? 0.5 : 0.25,
       });
       const haloMesh = new THREE.Mesh(haloGeo, haloMat);
       mesh.add(haloMesh);
@@ -119,7 +119,7 @@ export const WorkflowUniverseCanvas = ({ scrollProgress = 0 }) => {
         color: def.color,
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: def.isCenter ? 0.35 : 0.2,
+        opacity: def.isCenter ? 0.4 : 0.2,
       });
       const ringMesh = new THREE.Mesh(ringGeo, ringMat);
       ringMesh.rotation.x = Math.PI / 2;
@@ -159,12 +159,12 @@ export const WorkflowUniverseCanvas = ({ scrollProgress = 0 }) => {
       const curve = new THREE.QuadraticBezierCurve3(startNode.pos, midPoint, endNode.pos);
       connectionCurves.push(curve);
 
-      // Glowing tube connection
+      // Glowing tube connection in warm gold
       const tubeGeo = new THREE.TubeGeometry(curve, 32, 0.045, 8, false);
       const tubeMat = new THREE.MeshBasicMaterial({
-        color: 0x06b6d4,
+        color: 0xfbbf24,
         transparent: true,
-        opacity: 0.25,
+        opacity: 0.3,
       });
       const tubeMesh = new THREE.Mesh(tubeGeo, tubeMat);
       tubesGroup.add(tubeMesh);
@@ -188,14 +188,14 @@ export const WorkflowUniverseCanvas = ({ scrollProgress = 0 }) => {
       });
     }
 
-    // 7. Ambient Particle Dust
+    // 7. Ambient Particle Dust (Red + Gold/Yellow + White)
     const particleCount = isMobile ? 120 : 260;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
     const particleColors = new Float32Array(particleCount * 3);
 
-    const colCyan = new THREE.Color(0x06b6d4);
-    const colViolet = new THREE.Color(0x8b5cf6);
+    const colGold = new THREE.Color(0xfbbf24);
+    const colRed = new THREE.Color(0xef4444);
     const colWhite = new THREE.Color(0xffffff);
 
     for (let i = 0; i < particleCount; i++) {
@@ -204,7 +204,7 @@ export const WorkflowUniverseCanvas = ({ scrollProgress = 0 }) => {
       particlePositions[i3 + 1] = (Math.random() - 0.5) * 35;
       particlePositions[i3 + 2] = (Math.random() - 0.5) * 40;
 
-      const mixed = Math.random() > 0.6 ? colWhite : Math.random() > 0.3 ? colCyan : colViolet;
+      const mixed = Math.random() > 0.6 ? colWhite : Math.random() > 0.3 ? colGold : colRed;
       particleColors[i3] = mixed.r;
       particleColors[i3 + 1] = mixed.g;
       particleColors[i3 + 2] = mixed.b;

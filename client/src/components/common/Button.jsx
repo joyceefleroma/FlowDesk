@@ -23,13 +23,14 @@ export const Button = ({
   };
 
   const variantStyles = {
-    primary: 'bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white shadow-glow hover:shadow-glow-lg focus:ring-red-500 border border-red-400/40',
-    glow: 'bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white shadow-glow-lg focus:ring-red-500 border border-white/30 font-bold',
+    primary: 'bg-gradient-to-r from-red-600 via-amber-600 to-yellow-500 hover:from-red-500 hover:via-amber-500 hover:to-yellow-400 text-white shadow-glow-red hover:shadow-glow-yellow focus:ring-amber-500 border border-amber-400/40 font-bold',
+    glow: 'bg-gradient-to-r from-red-600 via-amber-600 to-yellow-500 hover:from-red-500 hover:via-amber-500 hover:to-yellow-400 text-white shadow-glow-yellow hover:shadow-glow-red focus:ring-yellow-500 border border-white/30 font-bold',
+    gold: 'bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black shadow-glow-yellow font-bold focus:ring-yellow-400 border border-yellow-300',
     white: 'bg-white hover:bg-slate-100 text-slate-950 shadow-glow-white border border-white font-bold focus:ring-white',
-    secondary: 'bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/15 focus:ring-red-500',
-    outline: 'bg-transparent hover:bg-red-500/10 text-slate-200 hover:text-white border border-red-500/40 hover:border-red-400 focus:ring-red-500',
+    secondary: 'bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/15 focus:ring-amber-500',
+    outline: 'bg-transparent hover:bg-amber-500/10 text-slate-200 hover:text-amber-300 border border-white/20 hover:border-amber-400/60 focus:ring-amber-500',
     danger: 'bg-red-700/80 hover:bg-red-600 text-white shadow-lg shadow-red-700/30 focus:ring-red-500 border border-red-500/40',
-    ghost: 'bg-transparent hover:bg-white/10 text-slate-300 hover:text-white focus:ring-red-500',
+    ghost: 'bg-transparent hover:bg-white/10 text-slate-300 hover:text-white focus:ring-amber-500',
   };
 
   return (

@@ -49,12 +49,12 @@ export const AutomationEngineSection = () => {
     <section id="engine" className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto relative z-10">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
-        <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-lightRed bg-brand-red/15 px-3.5 py-1 rounded-full border border-brand-red/30">
+        <span className="text-xs font-mono font-bold uppercase tracking-widest text-amber-300 bg-amber-500/15 px-3.5 py-1 rounded-full border border-amber-500/30 shadow-glow-yellow">
           Under the Hood
         </span>
         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mt-4">
           Let FlowDesk Handle the{' '}
-          <span className="bg-gradient-to-r from-brand-red via-rose-400 to-white bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-red-500 bg-clip-text text-transparent">
             Repetitive Work
           </span>
         </h2>
@@ -70,22 +70,22 @@ export const AutomationEngineSection = () => {
             key={i}
             className={`glass-panel rounded-3xl p-6 border flex flex-col justify-between transition-all group relative overflow-hidden ${
               step.isEngine
-                ? 'border-brand-red/60 bg-[#1e050d]/90 shadow-glow-red md:scale-105 z-20'
-                : 'border-white/10 bg-[#140409]/80 hover:border-brand-red/40 hover:shadow-glow-red'
+                ? 'border-amber-400/80 bg-gradient-to-b from-[#241308]/95 to-[#1c0808]/95 shadow-glow-yellow md:scale-105 z-20'
+                : 'border-white/10 bg-[#140a08]/80 hover:border-amber-500/40 hover:shadow-glow-yellow'
             }`}
           >
             {step.isEngine && (
-              <div className="absolute top-0 right-0 w-32 h-32 bg-brand-red/20 rounded-full blur-xl pointer-events-none" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/20 rounded-full blur-xl pointer-events-none" />
             )}
 
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
-                <span className={`text-xs font-mono font-black ${step.isEngine ? 'text-white' : 'text-brand-lightRed'}`}>
+                <span className={`text-xs font-mono font-black ${step.isEngine ? 'text-amber-300' : 'text-amber-400/80'}`}>
                   {step.num}
                 </span>
                 <step.icon
                   className={`w-4 h-4 ${
-                    step.isEngine ? 'text-brand-lightRed scale-110' : 'text-white/60 group-hover:text-brand-lightRed'
+                    step.isEngine ? 'text-yellow-400 scale-110' : 'text-white/60 group-hover:text-amber-300'
                   } transition-colors`}
                 />
               </div>
@@ -93,7 +93,7 @@ export const AutomationEngineSection = () => {
               <span
                 className={`text-[9px] font-mono font-black tracking-widest uppercase px-2 py-0.5 rounded ${
                   step.isEngine
-                    ? 'bg-brand-red text-white shadow-glow-red'
+                    ? 'bg-amber-500 text-black font-extrabold shadow-glow-yellow'
                     : 'bg-white/10 text-white/70'
                 }`}
               >
@@ -105,8 +105,8 @@ export const AutomationEngineSection = () => {
             </div>
 
             <div className="mt-6 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-white/40">
-              <span className={step.isEngine ? 'text-brand-lightRed font-bold' : ''}>ACTIVE</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className={step.isEngine ? 'text-amber-300 font-bold' : ''}>ACTIVE</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
             </div>
           </div>
         ))}
@@ -114,4 +114,5 @@ export const AutomationEngineSection = () => {
     </section>
   );
 };
+
 

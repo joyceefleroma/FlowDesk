@@ -6,12 +6,12 @@ import { Button } from '../common/Button';
 export const FinalCTASection = () => {
   return (
     <section id="cta" className="py-24 px-4 sm:px-8 lg:px-12 max-w-5xl mx-auto relative z-10 text-center">
-      <div className="glass-panel rounded-3xl p-8 sm:p-14 border border-brand-red/40 bg-[#16040a]/90 backdrop-blur-3xl shadow-glow-red relative overflow-hidden">
+      <div className="glass-panel rounded-3xl p-8 sm:p-14 border border-amber-500/40 bg-gradient-to-b from-[#1c0f0a]/95 to-[#120807]/95 backdrop-blur-3xl shadow-glow-yellow relative overflow-hidden">
         {/* Glow Spheres */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-red/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-red/20 border border-brand-red/40 text-brand-lightRed text-xs font-bold mb-6 shadow-glow-red">
-          <Sparkles className="w-3.5 h-3.5" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold mb-6 shadow-glow-yellow">
+          <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
           <span>Transform Your Productivity Today</span>
         </div>
 
@@ -31,7 +31,7 @@ export const FinalCTASection = () => {
             </Button>
           </Link>
           <Link to="/dashboard" className="w-full sm:w-auto">
-            <Button variant="outline" size="lg" icon={LayoutDashboard} className="w-full sm:w-auto text-base px-8 py-4 h-12">
+            <Button variant="outline" size="lg" icon={LayoutDashboard} className="w-full sm:w-auto text-base px-8 py-4 h-12 border-white/20 hover:border-amber-400/60 hover:text-amber-300">
               View Live Dashboard
             </Button>
           </Link>
@@ -40,15 +40,15 @@ export const FinalCTASection = () => {
         {/* Guarantee Bullet Points */}
         <div className="flex flex-wrap items-center justify-center gap-6 mt-10 pt-8 border-t border-white/10 text-xs text-white/60">
           <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <CheckCircle2 className="w-4 h-4 text-amber-400" />
             No credit card required
           </span>
           <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <CheckCircle2 className="w-4 h-4 text-yellow-400" />
             Pre-built workflow templates
           </span>
           <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <CheckCircle2 className="w-4 h-4 text-red-400" />
             Full audit log telemetry
           </span>
         </div>
@@ -56,4 +56,5 @@ export const FinalCTASection = () => {
     </section>
   );
 };
+
 

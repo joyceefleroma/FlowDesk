@@ -44,12 +44,12 @@ export const AutomationHistorySection = () => {
     <section id="telemetry" className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto relative z-10">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
-        <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-lightRed bg-brand-red/15 px-3.5 py-1 rounded-full border border-brand-red/30">
+        <span className="text-xs font-mono font-bold uppercase tracking-widest text-amber-300 bg-amber-500/15 px-3.5 py-1 rounded-full border border-amber-500/30 shadow-glow-yellow">
           Telemetry & Audit Trail
         </span>
         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mt-4">
           Every Automation.{' '}
-          <span className="bg-gradient-to-r from-brand-red via-rose-400 to-white bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-red-500 bg-clip-text text-transparent">
             Clearly Tracked.
           </span>
         </h2>
@@ -62,22 +62,22 @@ export const AutomationHistorySection = () => {
       {/* Grid: Timeline on Left / Stream on Right */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         {/* Timeline on Single Vertical Axis */}
-        <div className="lg:col-span-5 glass-panel rounded-3xl p-6 sm:p-8 border border-white/15 bg-[#120409]/90 backdrop-blur-3xl shadow-xl flex flex-col justify-between">
+        <div className="lg:col-span-5 glass-panel rounded-3xl p-6 sm:p-8 border border-white/15 bg-[#140a08]/90 backdrop-blur-3xl shadow-xl flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6 font-mono text-xs">
               <span className="text-white/80 font-bold flex items-center gap-2">
-                <Clock className="w-4 h-4 text-brand-lightRed" />
+                <Clock className="w-4 h-4 text-amber-400" />
                 EXECUTION TIMELINE
               </span>
-              <span className="text-emerald-400 font-bold">14ms total</span>
+              <span className="text-amber-300 font-bold">14ms total</span>
             </div>
 
-            <div className="relative pl-6 space-y-6 before:content-[''] before:absolute before:left-2 before:top-2 before:bottom-2 before:w-[2px] before:bg-gradient-to-b before:from-brand-red before:via-rose-500 before:to-emerald-400">
+            <div className="relative pl-6 space-y-6 before:content-[''] before:absolute before:left-2 before:top-2 before:bottom-2 before:w-[2px] before:bg-gradient-to-b before:from-amber-400 before:via-red-500 before:to-yellow-300">
               {timelineSteps.map((step, idx) => (
                 <div key={idx} className="relative group">
-                  <div className="absolute -left-[23px] top-1 w-3.5 h-3.5 rounded-full bg-[#120409] border-2 border-brand-red flex items-center justify-center group-hover:scale-125 transition-transform" />
+                  <div className="absolute -left-[23px] top-1 w-3.5 h-3.5 rounded-full bg-[#140a08] border-2 border-amber-400 flex items-center justify-center group-hover:scale-125 transition-transform" />
                   <div className="flex items-center justify-between text-[11px] font-mono mb-1">
-                    <span className="text-brand-lightRed font-bold">{step.time}</span>
+                    <span className="text-amber-300 font-bold">{step.time}</span>
                     <span className="text-white/40">{step.status}</span>
                   </div>
                   <h4 className="text-sm font-bold text-white tracking-tight">{step.event}</h4>
@@ -89,22 +89,22 @@ export const AutomationHistorySection = () => {
 
           <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-white/50">
             <span>Audit Trail Verified</span>
-            <span className="text-emerald-400 font-mono font-bold">IMMUTABLE</span>
+            <span className="text-amber-400 font-mono font-bold">IMMUTABLE</span>
           </div>
         </div>
 
         {/* Live Stream Terminal Box */}
-        <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-8 border border-white/15 bg-[#0f0307]/90 backdrop-blur-3xl shadow-2xl flex flex-col justify-between">
+        <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-8 border border-white/15 bg-[#120807]/90 backdrop-blur-3xl shadow-2xl flex flex-col justify-between">
           <div>
             {/* Terminal Header */}
             <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6 font-mono text-xs">
               <div className="flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-brand-lightRed" />
+                <Terminal className="w-4 h-4 text-amber-400" />
                 <span className="text-white/80 font-bold">AUTOMATION_LOG_STREAM // AUDIT</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-[11px] text-emerald-400 font-mono">Stream Active</span>
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                <span className="text-[11px] text-amber-300 font-mono">Stream Active</span>
               </div>
             </div>
 
@@ -113,10 +113,10 @@ export const AutomationHistorySection = () => {
               {sampleLogs.map((log, i) => (
                 <div
                   key={i}
-                  className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-brand-red/40 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                  className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-amber-500/40 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shrink-0 mt-0.5">
+                    <div className="p-2 rounded-xl bg-amber-500/15 text-amber-300 border border-amber-500/30 shrink-0 mt-0.5">
                       <CheckCircle2 className="w-3.5 h-3.5" />
                     </div>
 
@@ -130,17 +130,17 @@ export const AutomationHistorySection = () => {
 
                       <p className="text-xs text-white/60 mt-1">
                         Target: <strong className="text-white font-medium">{log.target}</strong> →{' '}
-                        <span className="text-brand-lightRed">{log.actions.join(', ')}</span>
+                        <span className="text-amber-300">{log.actions.join(', ')}</span>
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3 text-xs font-mono text-white/50 shrink-0 pl-9 sm:pl-0">
-                    <span className="text-emerald-400 font-bold">{log.duration}</span>
+                    <span className="text-amber-300 font-bold">{log.duration}</span>
                     <span>{log.time}</span>
-                    <Badge variant="success" size="sm">
+                    <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                       {log.status}
-                    </Badge>
+                    </span>
                   </div>
                 </div>
               ))}
