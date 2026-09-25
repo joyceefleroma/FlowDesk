@@ -41,9 +41,9 @@ export const WorkflowUniverseCanvas = ({ scrollProgress = 0 }) => {
     container.appendChild(renderer.domElement);
 
     const universeGroup = new THREE.Group();
-    // Offset network toward right on desktop to align beside hero text
+    // Offset network toward right on desktop to align beside left-aligned hero text
     if (!isMobile) {
-      universeGroup.position.set(6.5, 0, 0);
+      universeGroup.position.set(5.5, 0.5, 0);
     }
     scene.add(universeGroup);
 
