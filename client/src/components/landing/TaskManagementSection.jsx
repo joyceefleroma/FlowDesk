@@ -1,152 +1,119 @@
 import React from 'react';
-import { CheckSquare, Clock, AlertTriangle, CheckCircle2, Tag, Calendar, ChevronRight } from 'lucide-react';
+import { Clock, AlertTriangle, CheckCircle2, Tag, Zap, ArrowRight, Sparkles, ShieldAlert } from 'lucide-react';
 import { Badge } from '../common/Badge';
 
 export const TaskManagementSection = () => {
-  const sampleTasks = [
-    {
-      title: 'Finalize Distributed Systems Architecture Report',
-      category: 'PROJECTS',
-      priority: 'URGENT',
-      status: 'IN_PROGRESS',
-      dueDate: 'Today at 5:00 PM',
-      subtasksCompleted: 3,
-      totalSubtasks: 4,
-      tags: ['sys-arch', 'final'],
-    },
-    {
-      title: 'Review Client API Rate-Limiter Integration',
-      category: 'WORK',
-      priority: 'HIGH',
-      status: 'TO_DO',
-      dueDate: 'Tomorrow at 11:30 AM',
-      subtasksCompleted: 1,
-      totalSubtasks: 3,
-      tags: ['backend', 'security'],
-    },
-    {
-      title: 'Automated Database Backup Verification',
-      category: 'MAINTENANCE',
-      priority: 'MEDIUM',
-      status: 'COMPLETED',
-      dueDate: 'Yesterday',
-      subtasksCompleted: 2,
-      totalSubtasks: 2,
-      tags: ['infra', 'mongodb'],
-    },
-  ];
-
-  const columns = [
-    { label: 'To Do', count: 4, color: 'border-white/20 text-white' },
-    { label: 'In Progress', count: 3, color: 'border-brand-red text-brand-lightRed' },
-    { label: 'Completed', count: 12, color: 'border-emerald-500 text-emerald-400' },
-  ];
-
   return (
-    <section id="tasks" className="py-24 px-4 sm:px-8 max-w-7xl mx-auto relative z-10">
+    <section id="tasks" className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto relative z-10">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
         <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-lightRed bg-brand-red/15 px-3.5 py-1 rounded-full border border-brand-red/30">
           Task Orchestration
         </span>
         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mt-4">
-          Your Tasks. Your Rules.{' '}
-          <span className="bg-gradient-to-r from-brand-red to-rose-400 bg-clip-text text-transparent">
-            Your Workflow.
+          Your Tasks.{' '}
+          <span className="bg-gradient-to-r from-brand-red via-rose-400 to-white bg-clip-text text-transparent">
+            Your Rules.
           </span>
         </h2>
-        <p className="text-sm sm:text-base text-white/60 mt-4 leading-relaxed">
-          Manage items through customizable List and Kanban boards. Every task property—from subtask completion to
-          approaching deadlines—acts as a reactive automation trigger.
+        <p className="text-sm sm:text-base text-white/60 mt-4 leading-relaxed max-w-2xl mx-auto">
+          Every task property—from subtask completion to approaching deadlines—acts as a reactive automation trigger.
         </p>
       </div>
 
-      {/* Modern Kanban & List Preview Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {sampleTasks.map((task, i) => (
-          <div
-            key={i}
-            className="glass-panel rounded-3xl p-6 border border-white/15 bg-[#120509]/80 backdrop-blur-3xl shadow-xl flex flex-col justify-between hover:border-brand-red/50 transition-all group"
-          >
+      {/* Single Centered Premium Task Card Visualization */}
+      <div className="max-w-2xl mx-auto relative">
+        {/* Surrounding Workflow Trigger & Automation Signals */}
+        <div className="hidden sm:flex items-center gap-2 absolute -top-5 -left-6 z-20 px-3 py-1.5 rounded-full bg-[#1c060d] border border-brand-red/40 text-brand-lightRed text-xs font-mono font-bold shadow-glow-red backdrop-blur-xl">
+          <Zap className="w-3.5 h-3.5" />
+          <span>TRIGGER: Deadline Approaching</span>
+        </div>
+
+        <div className="hidden sm:flex items-center gap-2 absolute -bottom-5 -right-6 z-20 px-3 py-1.5 rounded-full bg-[#0a1e12] border border-emerald-500/40 text-emerald-300 text-xs font-mono font-bold shadow-2xl backdrop-blur-xl">
+          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+          <span>AUTOMATION: Auto-Escalated Priority</span>
+        </div>
+
+        {/* Main Central Card */}
+        <div className="glass-panel rounded-3xl p-8 sm:p-10 border border-white/15 bg-[#120509]/90 backdrop-blur-3xl shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-red/15 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Card Header */}
+          <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-6">
             <div>
-              {/* Category & Status Bar */}
-              <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
-                <span className="text-[10px] font-mono font-bold tracking-wider text-white/50 uppercase">
-                  {task.category}
-                </span>
-                <Badge
-                  variant={
-                    task.status === 'COMPLETED'
-                      ? 'success'
-                      : task.status === 'IN_PROGRESS'
-                      ? 'purple'
-                      : 'neutral'
-                  }
-                  size="sm"
-                >
-                  {task.status.replace('_', ' ')}
-                </Badge>
-              </div>
-
-              {/* Title */}
-              <h4 className="text-base font-bold text-white tracking-tight group-hover:text-brand-lightRed transition-colors">
-                {task.title}
-              </h4>
-
-              {/* Due Date Indicator */}
-              <div className="flex items-center gap-1.5 text-xs text-white/60 mt-3">
-                <Clock className="w-3.5 h-3.5 text-brand-lightRed" />
-                <span>{task.dueDate}</span>
-              </div>
-
-              {/* Subtask Progress Bar */}
-              <div className="mt-4 pt-4 border-t border-white/10">
-                <div className="flex items-center justify-between text-xs text-white/60 mb-1.5 font-mono">
-                  <span>Subtasks</span>
-                  <span className="font-bold text-white">
-                    {task.subtasksCompleted}/{task.totalSubtasks}
-                  </span>
-                </div>
-                <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-brand-red to-rose-400"
-                    style={{
-                      width: `${(task.subtasksCompleted / task.totalSubtasks) * 100}%`,
-                    }}
-                  />
-                </div>
-              </div>
+              <span className="text-[11px] font-mono font-bold text-white/50 uppercase tracking-widest">
+                ACTIVE TASK
+              </span>
+              <h3 className="text-2xl font-black text-white tracking-tight mt-1">
+                Complete project documentation
+              </h3>
             </div>
-
-            {/* Footer Tags & Priority */}
-            <div className="flex items-center justify-between gap-2 mt-6 pt-3 border-t border-white/10">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                {task.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] font-mono text-white/60 bg-white/[0.04] px-2 py-0.5 rounded border border-white/10"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-
-              <Badge
-                variant={
-                  task.priority === 'URGENT'
-                    ? 'danger'
-                    : task.priority === 'HIGH'
-                    ? 'warning'
-                    : 'info'
-                }
-                size="sm"
-              >
-                {task.priority}
-              </Badge>
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-xs font-mono text-white/70">SYNCED</span>
             </div>
           </div>
-        ))}
+
+          {/* Task Properties Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
+            {/* Priority */}
+            <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+              <span className="text-[10px] font-mono uppercase font-bold text-white/50 tracking-wider">
+                Priority
+              </span>
+              <div className="mt-2 flex items-center gap-2">
+                <Badge variant="warning" size="md" className="font-bold">
+                  HIGH
+                </Badge>
+              </div>
+            </div>
+
+            {/* Deadline */}
+            <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+              <span className="text-[10px] font-mono uppercase font-bold text-white/50 tracking-wider">
+                Deadline
+              </span>
+              <div className="mt-2 flex items-center gap-1.5 text-sm font-bold text-white">
+                <Clock className="w-4 h-4 text-brand-lightRed" />
+                <span>Tomorrow</span>
+              </div>
+            </div>
+
+            {/* Status */}
+            <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+              <span className="text-[10px] font-mono uppercase font-bold text-white/50 tracking-wider">
+                Status
+              </span>
+              <div className="mt-2">
+                <Badge variant="purple" size="md" className="font-bold">
+                  In Progress
+                </Badge>
+              </div>
+            </div>
+          </div>
+
+          {/* Subtask & Progress Track */}
+          <div className="mt-8 pt-6 border-t border-white/10">
+            <div className="flex items-center justify-between text-xs text-white/70 mb-2 font-mono">
+              <span>Task Execution Milestones</span>
+              <span className="font-bold text-white">3 / 4 completed (75%)</span>
+            </div>
+            <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+              <div className="h-full rounded-full bg-gradient-to-r from-brand-red to-rose-400 w-[75%]" />
+            </div>
+          </div>
+
+          {/* Footer Automation Diff */}
+          <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-white/60">
+            <div className="flex items-center gap-2 font-mono text-[11px]">
+              <span className="text-white/40">RULE:</span>
+              <span className="text-brand-lightRed">if due &lt; 24h $\rightarrow$ bump priority</span>
+            </div>
+            <span className="text-[11px] font-mono text-emerald-400">STATUS: MATCHED</span>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
+

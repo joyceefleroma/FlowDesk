@@ -4,7 +4,7 @@ import { Flame, Heart, Shield, Terminal, Globe } from 'lucide-react';
 
 export const LandingFooter = () => {
   return (
-    <footer className="border-t border-white/10 bg-[#060103]/90 backdrop-blur-2xl py-12 px-4 sm:px-8 relative z-10 text-xs text-white/50">
+    <footer className="border-t border-white/10 bg-[#060103]/90 backdrop-blur-2xl py-12 px-4 sm:px-8 lg:px-12 relative z-10 text-xs text-white/50">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Brand */}
         <div className="flex items-center gap-3">

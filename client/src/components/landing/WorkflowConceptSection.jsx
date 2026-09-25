@@ -39,7 +39,7 @@ export const WorkflowConceptSection = () => {
   };
 
   return (
-    <section id="concept" className="py-24 px-4 sm:px-8 max-w-7xl mx-auto relative z-10">
+    <section id="concept" className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto relative z-10">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
         <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-lightRed bg-brand-red/15 px-3.5 py-1 rounded-full border border-brand-red/30">
@@ -47,11 +47,11 @@ export const WorkflowConceptSection = () => {
         </span>
         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mt-4">
           Build Workflows{' '}
-          <span className="bg-gradient-to-r from-brand-red to-white bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-brand-red via-rose-400 to-white bg-clip-text text-transparent">
             Without Writing Code
           </span>
         </h2>
-        <p className="text-sm sm:text-base text-white/60 mt-4 leading-relaxed">
+        <p className="text-sm sm:text-base text-white/60 mt-4 leading-relaxed max-w-2xl mx-auto">
           Create powerful automated personal workflows using an intuitive visual interface.
           Chain complex conditions and multi-step actions effortlessly.
         </p>
@@ -140,3 +140,4 @@ export const WorkflowConceptSection = () => {
     </section>
   );
 };
+

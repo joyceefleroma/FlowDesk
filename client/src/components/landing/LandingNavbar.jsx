@@ -33,7 +33,7 @@ export const LandingNavbar = () => {
           : 'bg-transparent py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 flex items-center justify-between">
         {/* Brand */}
         <Link to="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-red via-rose-600 to-white flex items-center justify-center text-white shadow-glow-red group-hover:scale-105 transition-transform">
