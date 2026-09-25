@@ -18,7 +18,6 @@ export const LandingNavbar = () => {
   const navLinks = [
     { label: 'Overview', href: '#hero' },
     { label: 'The Problem', href: '#problem' },
-    { label: 'Workflows', href: '#concept' },
     { label: 'Tasks', href: '#tasks' },
     { label: 'Engine', href: '#engine' },
     { label: 'Telemetry', href: '#telemetry' },

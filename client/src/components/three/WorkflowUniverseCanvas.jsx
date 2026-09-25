@@ -21,13 +21,13 @@ export const WorkflowUniverseCanvas = ({ scrollProgress = 0 }) => {
     scene.fog = new THREE.FogExp2(0x050508, 0.02);
 
     const camera = new THREE.PerspectiveCamera(
-      isMobile ? 65 : 50,
+      isMobile ? 65 : 48,
       container.clientWidth / container.clientHeight,
       0.1,
       1000
     );
-    // Desktop: Shift camera slightly left so the 3D network sits on the right side of the screen
-    camera.position.set(isMobile ? 0 : -2, 2, isMobile ? 26 : 24);
+    // Desktop: Shift camera left so the 3D network is prominently framed on the right side
+    camera.position.set(isMobile ? 0 : -3.5, 1.8, isMobile ? 26 : 23);
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -37,30 +37,30 @@ export const WorkflowUniverseCanvas = ({ scrollProgress = 0 }) => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 1.25;
     container.appendChild(renderer.domElement);
 
     const universeGroup = new THREE.Group();
-    // Offset network toward right on desktop to align beside left-aligned hero text
+    // Offset network toward the right side on desktop
     if (!isMobile) {
-      universeGroup.position.set(5.5, 0.5, 0);
+      universeGroup.position.set(8.5, 0.5, 0);
     }
     scene.add(universeGroup);
 
-    // 2. Lighting (Red + Warm Gold + Crisp White)
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
+    // 2. Lighting (Red + Warm Gold + Crisp White) focused on the right-side cluster
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
 
-    const amberGoldLight = new THREE.PointLight(0xfbbf24, 4.0, 50);
-    amberGoldLight.position.set(8, 6, 8);
+    const amberGoldLight = new THREE.PointLight(0xfbbf24, 4.5, 55);
+    amberGoldLight.position.set(12, 6, 8);
     scene.add(amberGoldLight);
 
-    const redAccentLight = new THREE.PointLight(0xef4444, 3.5, 45);
-    redAccentLight.position.set(-8, -5, 6);
+    const redAccentLight = new THREE.PointLight(0xef4444, 4.0, 50);
+    redAccentLight.position.set(4, -5, 6);
     scene.add(redAccentLight);
 
-    const whiteCoreLight = new THREE.PointLight(0xffffff, 2.5, 35);
-    whiteCoreLight.position.set(0, 4, 10);
+    const whiteCoreLight = new THREE.PointLight(0xffffff, 3.0, 40);
+    whiteCoreLight.position.set(8, 4, 10);
     scene.add(whiteCoreLight);
 
     // 3. Subtle Digital Coordinate Grid
@@ -262,13 +262,13 @@ export const WorkflowUniverseCanvas = ({ scrollProgress = 0 }) => {
       const s = scrollRef.current || 0;
 
       // Parallax smooth interpolation
-      targetCameraX = (isMobile ? 0 : -2) + mouseX * 2.0;
-      targetCameraY = 2 - mouseY * 1.5 - s * 10;
+      targetCameraX = (isMobile ? 0 : -3.5) + mouseX * 2.0;
+      targetCameraY = 1.8 - mouseY * 1.5 - s * 10;
 
       camera.position.x += (targetCameraX - camera.position.x) * 0.035;
       camera.position.y += (targetCameraY - camera.position.y) * 0.035;
-      camera.position.z = (isMobile ? 26 : 24) - s * 6;
-      camera.lookAt(isMobile ? 0 : 3, -s * 5, 0);
+      camera.position.z = (isMobile ? 26 : 23) - s * 6;
+      camera.lookAt(isMobile ? 0 : 5.0, -s * 5, 0);
 
       // Slow orbital rotation
       if (!prefersReducedMotion) {

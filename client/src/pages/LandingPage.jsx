@@ -3,7 +3,6 @@ import { WorkflowUniverseCanvas } from '../components/three/WorkflowUniverseCanv
 import { LandingNavbar } from '../components/landing/LandingNavbar';
 import { HeroScene } from '../components/landing/HeroScene';
 import { ProblemSection } from '../components/landing/ProblemSection';
-import { WorkflowConceptSection } from '../components/landing/WorkflowConceptSection';
 import { TaskManagementSection } from '../components/landing/TaskManagementSection';
 import { AutomationEngineSection } from '../components/landing/AutomationEngineSection';
 import { AutomationHistorySection } from '../components/landing/AutomationHistorySection';
@@ -39,7 +38,7 @@ export const LandingPage = () => {
       {/* Navigation Bar */}
       <LandingNavbar />
 
-      {/* 8 Cinematic FlowDesk Scenes */}
+      {/* Cinematic FlowDesk Scenes */}
       <main className="relative z-10">
         {/* Scene 1: Hero */}
         <HeroScene />
@@ -47,16 +46,13 @@ export const LandingPage = () => {
         {/* Scene 2: The Problem */}
         <ProblemSection />
 
-        {/* Scene 3: Workflow Concept */}
-        <WorkflowConceptSection />
-
-        {/* Scene 4: Task Management */}
+        {/* Scene 3: Task Management */}
         <TaskManagementSection />
 
-        {/* Scene 5: Automation Engine */}
+        {/* Scene 4: Automation Engine */}
         <AutomationEngineSection />
 
-        {/* Scene 6: Automation History & Telemetry */}
+        {/* Scene 5: Automation History & Telemetry */}
         <AutomationHistorySection />
 
         {/* Scene 7: Analytics */}

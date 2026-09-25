@@ -34,7 +34,7 @@ export const HeroScene = () => {
               Get Started Free
             </Button>
           </Link>
-          <a href="#concept" className="w-full sm:w-auto">
+          <a href="#tasks" className="w-full sm:w-auto">
             <Button variant="outline" size="lg" icon={Play} className="w-full sm:w-auto text-base px-8 py-3.5 h-12 border-white/20 hover:border-amber-400/60 hover:text-amber-300">
               Explore Workflows
             </Button>
