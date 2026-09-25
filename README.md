@@ -2,12 +2,14 @@
 
 <div align="center">
   <h3>⚡ Transform your productivity with intelligent <code>WHEN (Trigger) → IF (Condition) → THEN (Action)</code> automated workflows.</h3>
+  <p>🎨 Ultra-modern Red & White Glassmorphism UI | Full-Stack React + Node/Express + MongoDB Atlas</p>
 </div>
 
 ---
 
 ## 🌟 Key Features
 
+* **Red & White Glassmorphism UI**: High-contrast dark luxury aesthetic with frosted acrylic panels, crimson glow accents, translucent white glass cards, and crisp typography.
 * **Visual Workflow Builder**: Configure custom event-driven automation rules without writing code.
   * **Triggers**: `Task Created`, `Task Completed`, `Deadline Approaching`, `Task Overdue`, `Priority Changed`, `Status Changed`, `Subtask Completed`.
   * **Conditions**: Operator filtering on `status`, `priority`, `category`, `tags`, `subtasksCompleted (%)`, and `hours until deadline` using operators like `EQUALS`, `NOT_EQUALS`, `CONTAINS`, `IN`, `GREATER_THAN`, `LESS_THAN`, `WITHIN_NEXT_HOURS`, `IS_EMPTY`.
@@ -37,16 +39,16 @@
 
 ## 🛠️ Technology Stack
 
-### Frontend
+### Frontend (`client/`)
 * **React 18** (Vite tooling)
-* **Tailwind CSS v3** (Custom glassmorphic design system and dark theme tokens)
-* **Lucide React** (Modern iconography)
+* **Tailwind CSS v3** (Custom Red & White glassmorphic tokens and glowing utility borders)
+* **Lucide React** (Crisp vector icons)
 * **Framer Motion** (Micro-interactions, modals, and toasts)
 * **Recharts** (Interactive SVG charts)
 * **Axios** (Centralized client with automatic Bearer token injection)
 * **date-fns** (Localized date formatting and distance calculations)
 
-### Backend
+### Backend (`server/`)
 * **Node.js & Express.js** (Layered modular architecture)
 * **MongoDB Atlas & Mongoose** (Compound indexes and TTL collections)
 * **JWT (jsonwebtoken)** & **bcryptjs** (Authentication & security)
@@ -56,80 +58,95 @@
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 Deployment Guide
 
-### 1. Prerequisites
-* **Node.js** (v18+ recommended)
-* **MongoDB** (Local instance on `mongodb://127.0.0.1:27017` or a MongoDB Atlas URI)
+This project is decoupled into two independent directories ready for separate deployment:
+* **Frontend (`client`)** ➡️ **Vercel**
+* **Backend (`server`)** ➡️ **Render.com**
 
-### 2. Environment Configuration
-Create `server/.env` with your settings:
+---
+
+### 1. Deploying Backend to Render.com
+
+1. Sign in to [Render.com](https://render.com) and click **New +** → **Web Service**.
+2. Connect your GitHub repository: `joyceefleroma/Flowdesk`.
+3. Configure the following service settings:
+   * **Name**: `flowdesk-backend` (or your preferred name)
+   * **Root Directory**: `server`
+   * **Runtime**: `Node`
+   * **Build Command**: `npm install`
+   * **Start Command**: `npm start`
+4. In the **Environment Variables** section, add:
+   ```env
+   NODE_ENV=production
+   PORT=10000
+   MONGODB_URI=mongodb+srv://joyceefleromavanja_db_user:2WPawWcijAzDZvpN@cluster0.v9ayxro.mongodb.net/flowdesk?retryWrites=true&w=majority
+   JWT_SECRET=your_super_secure_jwt_secret_render_production_2026
+   JWT_EXPIRES_IN=7d
+   CLIENT_URL=https://your-flowdesk-frontend.vercel.app
+   CRON_SCHEDULE=*/5 * * * *
+   ```
+5. Click **Create Web Service**.
+6. Once deployed, copy your Render URL (e.g., `https://flowdesk-backend.onrender.com`).
+
+---
+
+### 2. Deploying Frontend to Vercel
+
+1. Sign in to [Vercel](https://vercel.com) and click **Add New...** → **Project**.
+2. Select your repository: `joyceefleroma/Flowdesk`.
+3. Configure project settings:
+   * **Framework Preset**: `Vite`
+   * **Root Directory**: Click edit and select `client`
+   * **Build Command**: `npm run build`
+   * **Output Directory**: `dist`
+   * **Install Command**: `npm install`
+4. In the **Environment Variables** section, add:
+   ```env
+   VITE_API_URL=https://flowdesk-backend.onrender.com/api/v1
+   ```
+   *(Replace with your actual Render backend URL from Step 1)*
+5. Click **Deploy**. Vercel will build and serve your app globally with client-side SPA routing supported via `client/vercel.json`.
+
+---
+
+## 💻 Local Development Guide
+
+### 1. Install Dependencies
+```bash
+# Install root, backend, and frontend packages
+npm install
+cd server && npm install
+cd ../client && npm install
+```
+
+### 2. Configure Local Environment Variables
+Create `server/.env`:
 ```env
-PORT=5000
+PORT=5050
 NODE_ENV=development
-MONGODB_URI=mongodb://127.0.0.1:27017/flowdesk
-JWT_SECRET=your_secure_jwt_secret_key_change_in_production_2026
+MONGODB_URI=mongodb+srv://joyceefleromavanja_db_user:2WPawWcijAzDZvpN@cluster0.v9ayxro.mongodb.net/flowdesk
+JWT_SECRET=flowdesk_jwt_local_dev_secret_key_2026
 JWT_EXPIRES_IN=7d
 CLIENT_URL=http://localhost:5173
 CRON_SCHEDULE=*/5 * * * *
 ```
 
-### 3. Install Dependencies & Seed Data
-```bash
-# Install root, server, and client dependencies
-npm install
-cd server && npm install
-cd ../client && npm install
-
-# (Optional) Seed demo user, workflows, tasks, and telemetry data
-cd ../server && npm run seed
-```
-
-### 4. Run Development Servers
+### 3. Run Locally
 From the project root:
 ```bash
 npm run dev
 ```
-* **Frontend Application**: `http://localhost:5173`
-* **Backend API**: `http://localhost:5000`
+* **Frontend Client**: `http://localhost:5173`
+* **Backend API**: `http://localhost:5050`
 
 ---
 
-## 🔑 Demo Credentials (from Seeder)
+## 🔑 Demo Credentials (from Atlas Seeder)
 * **Email**: `alex.developer@flowdesk.io`
 * **Password**: `FlowDeskPass2026!`
 
-*(Or register a new account from the web UI)*
-
----
-
-## 📡 REST API Reference
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/api/v1/auth/register` | Register new user account |
-| `POST` | `/api/v1/auth/login` | Authenticate and obtain JWT |
-| `GET` | `/api/v1/auth/me` | Get current authenticated user profile |
-| `PUT` | `/api/v1/auth/profile` | Update profile preferences and timezone |
-| `GET` | `/api/v1/tasks` | Filter, sort, and paginate tasks |
-| `POST` | `/api/v1/tasks` | Create new task (triggers `TASK_CREATED`) |
-| `GET` | `/api/v1/tasks/:id` | Get single task details |
-| `PUT` | `/api/v1/tasks/:id` | Update task fields (triggers priority/status events) |
-| `PATCH`| `/api/v1/tasks/:id/status`| Update status only |
-| `DELETE`| `/api/v1/tasks/:id` | Delete task and its subtasks |
-| `POST` | `/api/v1/tasks/:id/subtasks` | Append subtask |
-| `PATCH`| `/api/v1/tasks/:id/subtasks/:subtaskId` | Toggle subtask completed |
-| `GET` | `/api/v1/workflows` | List all user workflows |
-| `POST` | `/api/v1/workflows` | Create workflow configuration |
-| `PUT` | `/api/v1/workflows/:id` | Update workflow rule |
-| `PATCH`| `/api/v1/workflows/:id/toggle` | Toggle workflow active state |
-| `DELETE`| `/api/v1/workflows/:id` | Delete workflow rule |
-| `POST` | `/api/v1/workflows/:id/test` | Dry-run test workflow against a task |
-| `GET` | `/api/v1/automation/logs` | Fetch audit logs with status/workflow filters |
-| `GET` | `/api/v1/automation/stats` | Execution counts and success rate metrics |
-| `GET` | `/api/v1/notifications` | Fetch user notifications |
-| `PATCH`| `/api/v1/notifications/read-all`| Mark all notifications as read |
-| `GET` | `/api/v1/dashboard/overview` | Aggregated KPIs and chart datasets |
+*(Or click "Create Account" on the web UI)*
 
 ---
 
