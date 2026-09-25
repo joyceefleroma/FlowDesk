@@ -6,8 +6,8 @@
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "build:client": "cd client && npm run build",
-    "build": "cd client && npm run build",
+    "build:client": "cd client && npm install && npm run build",
+    "build": "cd client && npm install && npm run build",
     "install:all": "npm install && cd server && npm install && cd ../client && npm install",
     "seed": "cd server && npm run seed",
     "start": "cd server && npm start"
